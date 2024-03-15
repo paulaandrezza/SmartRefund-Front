@@ -1,13 +1,9 @@
-import { LoginForm } from "@/types/auth/login";
+import { LoginForm, LoginFormResponse } from "@/types/auth/login";
 import { USER_TYPE } from "@/utils/constants/user-type";
-import {
-  getCookie,
-  removeCookie,
-  saveCookie,
-} from "@/utils/helpers/manageCookies";
+import { getCookie, removeCookie } from "@/utils/helpers/manageCookies";
 
 export const AuthServices = {
-  login(loginForm: LoginForm): boolean {
+  login(loginForm: LoginForm): LoginFormResponse {
     try {
       let token = "";
 
@@ -19,15 +15,10 @@ export const AuthServices = {
         throw new Error("Invalid user type");
       }
 
-      if (token) {
-        saveCookie(token);
-        return true;
-      } else {
-        throw new Error("Token not found for the provided user type");
-      }
+      return { token };
     } catch (error) {
       console.error("Error logging in:", error);
-      return false;
+      return { token: "" };
     }
   },
 

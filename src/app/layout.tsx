@@ -1,9 +1,8 @@
-import ApplicationContainer from "@/components/ApplicationContainer";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import ApplicationContainer from "@/components/Auth/ApplicationContainer";
+import { CssBaseline } from "@mui/material";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
-import { lightTheme } from "./theme/themes";
 
 const roboto = Roboto({
   weight: ["300", "400", "500"],
@@ -23,12 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <ThemeProvider theme={lightTheme}>
-        <CssBaseline />
-        <body className={roboto.className}>
-          <ApplicationContainer>{children}</ApplicationContainer>
-        </body>
-      </ThemeProvider>
+      <CssBaseline />
+      <body className={roboto.className}>
+        <ApplicationContainer>{children}</ApplicationContainer>
+      </body>
     </html>
   );
 }

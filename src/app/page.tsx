@@ -1,5 +1,6 @@
 "use client";
 
+import useAuth from "@/hooks/useAuth";
 import { AuthServices } from "@/services/auth/auth_services";
 import { APP_ROUTES } from "@/utils/constants/app-routes";
 import { USER_TYPE } from "@/utils/constants/user-type";
@@ -7,9 +8,13 @@ import { Button, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 export default function Home() {
   const router = useRouter();
+  const { handleLogin, userToken } = useAuth();
+
+  console.log("login: ", userToken);
 
   useEffect(() => {
     const checkAuthentication = async () => {
@@ -20,11 +25,21 @@ export default function Home() {
     checkAuthentication();
   }, []);
 
-  const handleLogin = (
+  const loginHandler = async (
     user_type: (typeof USER_TYPE)[keyof typeof USER_TYPE],
   ) => {
-    const isAuth = AuthServices.login({ user_type });
-    if (isAuth) router.push(APP_ROUTES.private.refund);
+    try {
+      const isLoginSuccessful = await handleLogin(user_type);
+      if (isLoginSuccessful) {
+        toast.success("Login efetuado com sucesso!");
+        router.push(APP_ROUTES.private.refund);
+      } else {
+        toast.error("Usuário e/ou senha incorretos");
+      }
+    } catch (error) {
+      console.error("error:", error);
+      toast.error("Houve um erro ao realizar o login");
+    }
   };
 
   return (
@@ -38,13 +53,13 @@ export default function Home() {
       <div className="flex flex-row gap-4 items-center justify-center">
         <Button
           variant="contained"
-          onClick={() => handleLogin(USER_TYPE.EMPLOYEE)}
+          onClick={() => loginHandler(USER_TYPE.EMPLOYEE)}
         >
           Funcionário
         </Button>
         <Button
           variant="contained"
-          onClick={() => handleLogin(USER_TYPE.FINANCE_EMPLOYEE)}
+          onClick={() => loginHandler(USER_TYPE.FINANCE_EMPLOYEE)}
         >
           Funcionário do financeiro
         </Button>
