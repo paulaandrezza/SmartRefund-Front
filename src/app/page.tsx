@@ -12,9 +12,7 @@ import { toast } from "react-toastify";
 
 export default function Home() {
   const router = useRouter();
-  const { handleLogin, userToken } = useAuth();
-
-  console.log("login: ", userToken);
+  const { handleLogin } = useAuth();
 
   useEffect(() => {
     const checkAuthentication = async () => {

@@ -5,5 +5,5 @@ export type LoginForm = {
 };
 
 export type LoginFormResponse = {
-  token: string;
+  token: (typeof USER_TYPE)[keyof typeof USER_TYPE];
 };
