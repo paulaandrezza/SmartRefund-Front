@@ -1,3 +1,4 @@
+import ApplicationContainer from "@/components/ApplicationContainer";
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
@@ -24,7 +25,9 @@ export default function RootLayout({
     <html lang="pt-br">
       <ThemeProvider theme={lightTheme}>
         <CssBaseline />
-        <body className={roboto.className}>{children}</body>
+        <body className={roboto.className}>
+          <ApplicationContainer>{children}</ApplicationContainer>
+        </body>
       </ThemeProvider>
     </html>
   );
