@@ -9,7 +9,7 @@ const recipData = {
   hash: "AAABKJ",
   employeeId: 1,
   creationDate: new Date(),
-  status: 1,
+  status: 5,
   image: "/logo.png",
 };
 

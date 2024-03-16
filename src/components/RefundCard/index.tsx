@@ -1,5 +1,6 @@
 import { RecipData } from "@/types/refund/ReciptData";
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { InternalReceiptStatusEnum } from "@/utils/constants/enums";
+import { Card, CardContent, CardMedia, Chip, Typography } from "@mui/material";
 
 export const RefundCard = ({ cardInfo }: { cardInfo: RecipData }) => {
   return (
@@ -17,9 +18,20 @@ export const RefundCard = ({ cardInfo }: { cardInfo: RecipData }) => {
         <Typography variant="body2">
           <b>Data de criação:</b> {cardInfo.creationDate.toLocaleString()}
         </Typography>
-        <Typography variant="body2">
-          <b>Status:</b> Sucesso
-        </Typography>
+        <div className="flex justify-end pt-2">
+          <Chip
+            label={
+              InternalReceiptStatusEnum[
+                cardInfo.status as keyof typeof InternalReceiptStatusEnum
+              ].label
+            }
+            color={
+              InternalReceiptStatusEnum[
+                cardInfo.status as keyof typeof InternalReceiptStatusEnum
+              ].color
+            }
+          />
+        </div>
       </CardContent>
     </Card>
   );
