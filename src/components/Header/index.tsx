@@ -17,7 +17,7 @@ export const Header = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="secondary">
+      <AppBar position="static">
         <Toolbar>
           <Image src="/logo.png" alt="logo" width={50} height={50} />
           <Typography
@@ -27,8 +27,12 @@ export const Header = () => {
           >
             Smart Refund
           </Typography>
-          <Button variant="contained" onClick={() => logoutHandler()}>
-            <b>Sair</b>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={() => logoutHandler()}
+          >
+            Sair
           </Button>
         </Toolbar>
       </AppBar>
