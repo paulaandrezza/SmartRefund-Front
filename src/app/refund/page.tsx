@@ -1,32 +1,38 @@
 "use client";
 
+import { AsideFilter } from "@/components/AsideFilter";
+import { Header } from "@/components/Header";
 import useAuth from "@/hooks/useAuth";
-import { APP_ROUTES } from "@/utils/constants/app-routes";
-import { Button, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
-import { toast } from "react-toastify";
+import { Typography } from "@mui/material";
+
+const gridStyles = {
+  display: "grid",
+  width: "100%",
+  gridTemplateColumns: "200px 1fr",
+  gap: "16px",
+};
 
 export default function Refund() {
-  const router = useRouter();
-  const { handleLogout, userToken } = useAuth();
-
-  const logoutHandler = () => {
-    handleLogout();
-    toast.success("Logout efetuado com sucesso!");
-    router.push(APP_ROUTES.public.root);
-  };
+  const { userToken } = useAuth();
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center gap-8 p-24">
-      {userToken.token == process.env.NEXT_PUBLIC_API_TOKEN_EMPLOYEE && (
-        <Typography component="p">Funcionário</Typography>
-      )}
-      {userToken.token == process.env.NEXT_PUBLIC_API_TOKEN_FINANCE_EMPLOYE && (
-        <Typography component="p">Funcionário do Financeiro</Typography>
-      )}
-      <Button variant="contained" onClick={() => logoutHandler()}>
-        Sair
-      </Button>
-    </main>
+    <>
+      <Header />
+      <main
+        className="flex min-h-full flex-col items-center justify-center gap-8 p-6"
+        style={gridStyles}
+      >
+        <AsideFilter />
+        <div>
+          {userToken.token == process.env.NEXT_PUBLIC_API_TOKEN_EMPLOYEE && (
+            <Typography component="p">Funcionário</Typography>
+          )}
+          {userToken.token ==
+            process.env.NEXT_PUBLIC_API_TOKEN_FINANCE_EMPLOYE && (
+            <Typography component="p">Funcionário do Financeiro</Typography>
+          )}
+        </div>
+      </main>
+    </>
   );
 }

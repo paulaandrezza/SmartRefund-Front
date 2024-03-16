@@ -5,5 +5,5 @@ export type LoginForm = {
 };
 
 export type LoginFormResponse = {
-  token: UserTypes;
+  token: string;
 };

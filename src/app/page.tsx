@@ -31,6 +31,7 @@ export default function Home() {
         router.push(APP_ROUTES.private.refund);
       } else {
         toast.error("Usuário e/ou senha incorretos");
+        console.error("error:", ".env.local is not a valid environment");
       }
     } catch (error) {
       console.error("error:", error);
