@@ -57,7 +57,7 @@ export const AsideFilter = () => {
   };
 
   return (
-    <aside className="h-full flex items-center justify-center pb-12 p-4">
+    <aside className="h-full flex items-center justify-center pb-12 p-4 bg-[#e5f4eb]">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <FormControl size={"small"} variant={"outlined"}>
           <FormLabel component="legend">Filtro</FormLabel>

@@ -4,5 +4,6 @@ export const APP_ROUTES = {
   },
   public: {
     root: "/",
+    login: "/login",
   },
 };

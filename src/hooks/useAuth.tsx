@@ -1,29 +1,28 @@
 import { AuthServices } from "@/services/auth/auth_services";
-import { LoginFormResponse } from "@/types/auth/login";
-import { UserTypes } from "@/utils/constants/user-type";
+import { ApiLoginResponse, LoginForm } from "@/types/auth/login";
 import { removeCookie, saveCookie } from "@/utils/helpers/manageCookies";
 import { createContext, useCallback, useContext, useState } from "react";
 
 type IAuthContextData = {
-  userToken: LoginFormResponse;
-  handleLogin: (user_type: UserTypes) => Promise<boolean>;
+  userToken: ApiLoginResponse;
+  handleLogin: (loginForm: LoginForm) => Promise<boolean>;
   handleLogout: () => void;
 };
 
 const AuthContext = createContext({} as IAuthContextData);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [userToken, setUserToken] = useState<LoginFormResponse>(
-    {} as LoginFormResponse,
+  const [userToken, setUserToken] = useState<ApiLoginResponse>(
+    {} as ApiLoginResponse,
   );
 
-  const handleLogin = async (user_type: UserTypes) => {
+  const handleLogin = async (loginForm: LoginForm) => {
     try {
-      const isAuth = AuthServices.login({ user_type });
+      const { data } = await AuthServices.login(loginForm);
 
-      setUserToken(isAuth);
-      if (isAuth.token !== "") {
-        saveCookie(isAuth.token);
+      setUserToken(data);
+      if (data.token !== "") {
+        saveCookie(data.token);
       } else {
         throw new Error(
           "Token not found for the provided user type. Check the .env.local file",
@@ -38,7 +37,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const handleLogout = useCallback(() => {
-    setUserToken({} as LoginFormResponse);
+    setUserToken({} as ApiLoginResponse);
     removeCookie();
   }, []);
 

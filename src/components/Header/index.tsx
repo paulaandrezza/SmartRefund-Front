@@ -12,7 +12,7 @@ export const Header = () => {
   const logoutHandler = () => {
     handleLogout();
     toast.success("Logout efetuado com sucesso!");
-    router.push(APP_ROUTES.public.root);
+    router.push(APP_ROUTES.public.login);
   };
 
   return (

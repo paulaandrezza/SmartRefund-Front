@@ -1,9 +1,13 @@
-import { UserTypes } from "@/utils/constants/user-type";
-
 export type LoginForm = {
-  user_type: UserTypes;
+  username: string;
+  password: string;
 };
 
 export type LoginFormResponse = {
   token: string;
+};
+
+export type ApiLoginResponse = {
+  token: string;
+  user_type: string;
 };

@@ -27,7 +27,7 @@ export const PrivateRoute = ({ children }: PrivateRouteProps) => {
 
   useEffect(() => {
     if (isUserAuthenticated !== null && isUserAuthenticated === false) {
-      push(APP_ROUTES.public.root);
+      push(APP_ROUTES.public.login);
     }
   }, [isUserAuthenticated, push]);
 
