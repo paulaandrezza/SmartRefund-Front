@@ -15,7 +15,7 @@ const asideFilterSchema = yup.object().shape({
   status: yup.array().of(yup.number()),
 });
 
-const options = [
+const optionsStatus = [
   {
     label: "Não processado",
     value: "1",
@@ -35,6 +35,17 @@ const options = [
   {
     label: "Sem sucesso",
     value: "5",
+  },
+];
+
+const optionsStatusTranslate = [
+  {
+    label: "Tradução bem sucedida",
+    value: "1",
+  },
+  {
+    label: "Erro da tradução",
+    value: "2",
   },
 ];
 
@@ -60,9 +71,9 @@ export const AsideFilter = () => {
     <aside className="h-full flex items-center justify-center pb-12 p-4 bg-[#e5f4eb]">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <FormControl size={"small"} variant={"outlined"}>
-          <FormLabel component="legend">Filtro</FormLabel>
+          <FormLabel component="legend">Status</FormLabel>
           <div>
-            {options.map((option: any) => {
+            {optionsStatus.map((option: any) => {
               return (
                 // TODO: resetar checkbox apos limpar filtros
                 <FormControlLabel
@@ -76,6 +87,25 @@ export const AsideFilter = () => {
             })}
           </div>
         </FormControl>
+        <Divider />
+
+        <FormControl size={"small"} variant={"outlined"}>
+          <FormLabel component="legend">Tradução</FormLabel>
+          <div>
+            {optionsStatusTranslate.map((option: any) => {
+              return (
+                <FormControlLabel
+                  key={option.value}
+                  control={
+                    <Checkbox {...register("status")} value={option.value} />
+                  }
+                  label={option.label}
+                />
+              );
+            })}
+          </div>
+        </FormControl>
+
         <Divider />
         <div className="flex flex-col gap-2">
           <Button type="submit" variant="contained">
