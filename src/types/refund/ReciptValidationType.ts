@@ -1,3 +1,5 @@
 export type ReciptValidationType = {
-  status?: (number | undefined)[];
+  optionsStatusGPT?: (number | undefined)[];
+  optionsStatusTranslate?: (number | undefined)[];
+  optionsStatusRefund?: (number | undefined)[];
 };

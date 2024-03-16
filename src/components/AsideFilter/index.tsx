@@ -1,4 +1,5 @@
 import { ReciptValidationType } from "@/types/refund/ReciptValidationType";
+import { filters } from "@/utils/constants/filters";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Button,
@@ -12,42 +13,10 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 
 const asideFilterSchema = yup.object().shape({
-  status: yup.array().of(yup.number()),
+  optionsStatusGPT: yup.array().of(yup.number()),
+  optionsStatusTranslate: yup.array().of(yup.number()),
+  optionsStatusRefund: yup.array().of(yup.number()),
 });
-
-const optionsStatus = [
-  {
-    label: "Não processado",
-    value: "1",
-  },
-  {
-    label: "Sucesso",
-    value: "2",
-  },
-  {
-    label: "Falhou uma vez",
-    value: "3",
-  },
-  {
-    label: "Falhou duas vezes",
-    value: "4",
-  },
-  {
-    label: "Sem sucesso",
-    value: "5",
-  },
-];
-
-const optionsStatusTranslate = [
-  {
-    label: "Tradução bem sucedida",
-    value: "1",
-  },
-  {
-    label: "Erro da tradução",
-    value: "2",
-  },
-];
 
 export const AsideFilter = () => {
   const {
@@ -70,43 +39,41 @@ export const AsideFilter = () => {
   return (
     <aside className="h-full flex items-center justify-center pb-12 p-4 bg-[#e5f4eb]">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        <FormControl size={"small"} variant={"outlined"}>
-          <FormLabel component="legend">Status</FormLabel>
-          <div>
-            {optionsStatus.map((option: any) => {
-              return (
-                // TODO: resetar checkbox apos limpar filtros
-                <FormControlLabel
-                  key={option.value}
-                  control={
-                    <Checkbox {...register("status")} value={option.value} />
-                  }
-                  label={option.label}
-                />
-              );
-            })}
-          </div>
-        </FormControl>
-        <Divider />
+        {Object.values(filters).map((filter: any) => {
+          return (
+            <>
+              <FormControl
+                size={"small"}
+                variant={"outlined"}
+                key={filter.label}
+              >
+                <FormLabel component="legend">
+                  <b>{filter.label}</b>
+                </FormLabel>
+                <div className="flex flex-col">
+                  {filter.options.map((option: any) => {
+                    return (
+                      // TODO: resetar checkbox apos limpar filtros
+                      <FormControlLabel
+                        key={option.value}
+                        control={
+                          <Checkbox
+                            {...register(option.value)}
+                            value={option.value}
+                            sx={{ padding: "4px" }}
+                          />
+                        }
+                        label={option.label}
+                      />
+                    );
+                  })}
+                </div>
+              </FormControl>
+              <Divider />
+            </>
+          );
+        })}
 
-        <FormControl size={"small"} variant={"outlined"}>
-          <FormLabel component="legend">Tradução</FormLabel>
-          <div>
-            {optionsStatusTranslate.map((option: any) => {
-              return (
-                <FormControlLabel
-                  key={option.value}
-                  control={
-                    <Checkbox {...register("status")} value={option.value} />
-                  }
-                  label={option.label}
-                />
-              );
-            })}
-          </div>
-        </FormControl>
-
-        <Divider />
         <div className="flex flex-col gap-2">
           <Button type="submit" variant="contained">
             Aplicar filtros
