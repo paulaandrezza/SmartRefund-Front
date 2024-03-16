@@ -20,6 +20,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const { data } = await AuthServices.login(loginForm);
 
+      console.log(data);
+
       setUserToken(data);
       if (data.token !== "") {
         saveCookie(data.token);

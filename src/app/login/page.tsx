@@ -3,6 +3,7 @@
 import useAuth from "@/hooks/useAuth";
 import { LoginForm } from "@/types/auth/login";
 import { APP_ROUTES } from "@/utils/constants/app-routes";
+import { isAuthenticated } from "@/utils/helpers/manageCookies";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { AccountCircle, LockRounded } from "@mui/icons-material";
 import { Button, InputAdornment, TextField, Typography } from "@mui/material";
@@ -38,12 +39,11 @@ export default function Login() {
   });
 
   const onSubmit: SubmitHandler<LoginForm> = async (data) => {
-    console.log(`Form: ${JSON.stringify(data)}`);
-
     try {
       const isLoginSuccessful = await handleLogin(data);
+      const isAuth = await isAuthenticated();
 
-      if (isLoginSuccessful) {
+      if (isLoginSuccessful && isAuth) {
         toast.success("Login efetuado com sucesso!");
         router.push(APP_ROUTES.private.refund);
       } else {

@@ -27,7 +27,7 @@ export const Header = () => {
           >
             Smart Refund
           </Typography>
-          <Button color="inherit" onClick={() => logoutHandler()}>
+          <Button variant="contained" onClick={() => logoutHandler()}>
             <b>Sair</b>
           </Button>
         </Toolbar>
