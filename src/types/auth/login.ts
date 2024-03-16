@@ -1,9 +1,9 @@
-import { USER_TYPE } from "@/utils/constants/user-type";
+import { UserTypes } from "@/utils/constants/user-type";
 
 export type LoginForm = {
-  user_type: (typeof USER_TYPE)[keyof typeof USER_TYPE];
+  user_type: UserTypes;
 };
 
 export type LoginFormResponse = {
-  token: (typeof USER_TYPE)[keyof typeof USER_TYPE];
+  token: UserTypes;
 };

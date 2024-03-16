@@ -3,7 +3,7 @@
 import useAuth from "@/hooks/useAuth";
 import { AuthServices } from "@/services/auth/auth_services";
 import { APP_ROUTES } from "@/utils/constants/app-routes";
-import { USER_TYPE } from "@/utils/constants/user-type";
+import { USER_TYPE, UserTypes } from "@/utils/constants/user-type";
 import { Button, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -23,9 +23,7 @@ export default function Home() {
     checkAuthentication();
   }, []);
 
-  const loginHandler = async (
-    user_type: (typeof USER_TYPE)[keyof typeof USER_TYPE],
-  ) => {
+  const loginHandler = async (user_type: UserTypes) => {
     try {
       const isLoginSuccessful = await handleLogin(user_type);
       if (isLoginSuccessful) {
