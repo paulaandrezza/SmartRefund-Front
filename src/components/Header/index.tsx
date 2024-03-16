@@ -28,7 +28,7 @@ export const Header = () => {
             Smart Refund
           </Typography>
           <Button color="inherit" onClick={() => logoutHandler()}>
-            Sair
+            <b>Sair</b>
           </Button>
         </Toolbar>
       </AppBar>
