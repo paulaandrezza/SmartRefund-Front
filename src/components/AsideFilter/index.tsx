@@ -57,8 +57,8 @@ export const AsideFilter = () => {
   };
 
   return (
-    <aside>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <aside className="h-full flex items-center justify-center pb-12">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         <FormControl size={"small"} variant={"outlined"}>
           <FormLabel component="legend">Filtro</FormLabel>
           <div>
@@ -77,7 +77,7 @@ export const AsideFilter = () => {
           </div>
         </FormControl>
         <Divider />
-        <div className="flex flex-col gap-2 py-2">
+        <div className="flex flex-col gap-2">
           <Button type="submit" variant="contained">
             Aplicar filtros
           </Button>

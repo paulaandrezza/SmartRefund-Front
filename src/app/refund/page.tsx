@@ -19,7 +19,7 @@ export default function Refund() {
     <>
       <Header />
       <main
-        className="flex min-h-full flex-col items-center justify-center gap-8 p-6"
+        className="flex min-h-screen flex-col items-center justify-center gap-8 p-6"
         style={gridStyles}
       >
         <AsideFilter />
