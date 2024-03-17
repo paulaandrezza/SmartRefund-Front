@@ -5,13 +5,6 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-const gridStyles = {
-  display: "grid",
-  width: "100%",
-  gridTemplateColumns: "260px 1fr",
-  gap: "32px",
-};
-
 export const Header = () => {
   const router = useRouter();
   const { handleLogout } = useAuth();

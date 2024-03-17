@@ -4,13 +4,13 @@ import React from "react";
 import { AddReciptModal } from "../AddReciptModal";
 import { RefundCard } from "../RefundCard";
 
-const reciptData = {
+export const reciptData = {
   id: 1,
   hash: "AAABKJ",
   employeeId: 1,
   creationDate: new Date(),
   status: 2,
-  image: "/logo.png",
+  image: "/nf.webp",
   rawVision: {
     id: 1,
     isReceipt: "Sim",
@@ -24,7 +24,8 @@ const reciptData = {
       category: 1,
       status: 2,
       total: 50,
-      description: "Reembolso de refeição",
+      description:
+        "Reembolso de refeição sdjfghsdkdffdssssjg dfgjkh dfgjk fdgjkfdhgkjh fgjhfg kfghklgkjf hjkhfgkj hfgfghjghjk ghjghjkghkghjk hjkjl",
     },
   },
 };
