@@ -1,59 +1,74 @@
-import { ReciptDataType } from "@/types/refund/ReciptDataType";
+import { ReceiptDataType } from "@/types/refund/EventSourceType";
 import { APP_ROUTES } from "@/utils/constants/app-routes";
 import {
   InternalReceiptStatusEnum,
   StatusRefundEnum,
 } from "@/utils/constants/enums";
+import { formattedDate } from "@/utils/helpers/formattedDate";
 import { Card, CardContent, CardMedia, Chip, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 
-export const RefundCard = ({ cardInfo }: { cardInfo: ReciptDataType }) => {
+interface RefundCardProps {
+  cardInfo: ReceiptDataType;
+}
+
+export const RefundCard = ({ cardInfo }: RefundCardProps) => {
   const { push } = useRouter();
 
   return (
     <Card
       sx={{ maxWidth: 300 }}
       className="cursor-pointer"
-      onClick={() => push(`${APP_ROUTES.private.refund}/${cardInfo.hash}`)}
+      onClick={() =>
+        push(
+          `${APP_ROUTES.private.refund}/${cardInfo.internalReceipt.uniqueHash}`,
+        )
+      }
     >
       <CardMedia
         component="img"
         height="194"
-        image={cardInfo.image}
-        alt="Paella dish"
+        image={cardInfo.internalReceipt.image}
+        alt="Nota fiscal"
       />
       <CardContent>
         <Typography variant="body2">
-          <b>Hash:</b> {cardInfo.hash}
+          <b>Hash:</b> {cardInfo.internalReceipt.uniqueHash}
         </Typography>
         <Typography variant="body2">
-          <b>Data de criação:</b> {cardInfo.creationDate.toLocaleString()}
+          <b>Data de criação:</b>{" "}
+          {formattedDate(cardInfo.internalReceipt.creationDate)}
         </Typography>
         <div className="flex justify-end gap-2 pt-2">
-          <Chip
-            label={
-              InternalReceiptStatusEnum[
-                cardInfo.status as keyof typeof InternalReceiptStatusEnum
-              ].label
-            }
-            color={
-              InternalReceiptStatusEnum[
-                cardInfo.status as keyof typeof InternalReceiptStatusEnum
-              ].color
-            }
-          />
-          {cardInfo.rawVision?.translatedVision?.status && (
+          {cardInfo.internalReceipt.status !== 0 && (
+            <Chip
+              label={
+                InternalReceiptStatusEnum[
+                  cardInfo.internalReceipt
+                    .status as keyof typeof InternalReceiptStatusEnum
+                ].label
+              }
+              color={
+                InternalReceiptStatusEnum[
+                  cardInfo.internalReceipt
+                    .status as keyof typeof InternalReceiptStatusEnum
+                ].color
+              }
+            />
+          )}
+
+          {cardInfo.translatedVision.status !== 0 && (
             <Chip
               label={
                 StatusRefundEnum[
-                  cardInfo.rawVision?.translatedVision
-                    ?.status as keyof typeof StatusRefundEnum
+                  cardInfo.translatedVision
+                    .status as keyof typeof StatusRefundEnum
                 ].label
               }
               color={
                 StatusRefundEnum[
-                  cardInfo.rawVision?.translatedVision
-                    ?.status as keyof typeof StatusRefundEnum
+                  cardInfo.translatedVision
+                    .status as keyof typeof StatusRefundEnum
                 ].color
               }
             />

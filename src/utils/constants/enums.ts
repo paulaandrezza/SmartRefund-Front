@@ -4,6 +4,7 @@ export const InternalReceiptStatusEnum = {
   3: { label: "Falhou uma vez", color: "warning" },
   4: { label: "Falhou mais de uma vez", color: "warning" },
   5: { label: "Sem sucesso", color: "error" },
+  6: { label: "Falha na autenticação do Vision", color: "error" },
 } as const;
 
 export const TranslatedVisionReceiptCategoryEnum = {

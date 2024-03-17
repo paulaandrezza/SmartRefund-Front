@@ -1,3 +1,4 @@
+import { AllReceiptDataType } from "@/types/refund/EventSourceType";
 import { getCookie } from "@/utils/helpers/manageCookies";
 import { Add, Search } from "@mui/icons-material";
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
@@ -5,33 +6,11 @@ import React from "react";
 import { AddReciptModal } from "../Modals/AddReciptModal";
 import { RefundCard } from "../RefundCard";
 
-export const reciptData = {
-  id: 1,
-  hash: "AAABKJ",
-  employeeId: 1,
-  creationDate: new Date(),
-  status: 2,
-  image: "/Nfe.png",
-  rawVision: {
-    id: 1,
-    isReceipt: "Sim",
-    category: "Alimentação",
-    total: "50.00",
-    description: "Reembolso de refeição",
-    isTranslated: true,
-    translatedVision: {
-      id: 1,
-      isReceipt: true,
-      category: 1,
-      status: 2,
-      total: 50,
-      description:
-        "Reembolso de refeição sdjfghsdkdffdssssjg dfgjkh dfgjk fdgjkfdhgkjh fgjhfg kfghklgkjf hjkhfgkj hfgfghjghjk ghjghjkghkghjk hjkjl",
-    },
-  },
-};
+interface MainSectionProps {
+  receiptsData: AllReceiptDataType | undefined;
+}
 
-export const MainSection = () => {
+export const MainSection = ({ receiptsData }: MainSectionProps) => {
   const [openModal, setOpenModal] = React.useState(false);
   const [showClearIcon, setShowClearIcon] = React.useState("none");
   const [userType, setUserType] = React.useState<string | undefined>();
@@ -86,11 +65,9 @@ export const MainSection = () => {
           )}
         </div>
         <div className="flex flex-wrap justify-center gap-4">
-          {Array(19)
-            .fill(19)
-            .map((_, index) => (
-              <RefundCard key={index} cardInfo={reciptData} />
-            ))}
+          {receiptsData?.map((receiptData, index) => (
+            <RefundCard key={index} cardInfo={receiptData} />
+          ))}
         </div>
       </Box>
       <AddReciptModal open={openModal} setIsOpen={setOpenModal} />
