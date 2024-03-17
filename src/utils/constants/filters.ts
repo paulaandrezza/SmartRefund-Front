@@ -1,6 +1,7 @@
 export const filters = {
   optionsStatusGPT: {
     label: "Status de Envio para o GPT",
+    key: "optionsStatusGPT",
     options: [
       {
         label: "Não processado",
@@ -27,6 +28,7 @@ export const filters = {
 
   optionsStatusTranslate: {
     label: "Status da Tradução",
+    key: "optionsStatusTranslate",
     options: [
       {
         label: "Tradução bem sucedida",
@@ -41,6 +43,7 @@ export const filters = {
 
   optionsStatusRefund: {
     label: "Status do Reembolso",
+    key: "optionsStatusRefund",
     options: [
       {
         label: "Submetido",

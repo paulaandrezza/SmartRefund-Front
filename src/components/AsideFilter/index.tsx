@@ -29,6 +29,7 @@ export const AsideFilter = () => {
   });
 
   const onSubmit: SubmitHandler<ReciptValidationType> = async (data) => {
+    console.log(data);
     try {
       console.log(`Form submission: ${JSON.stringify(data)}`);
     } catch (error) {
@@ -56,14 +57,13 @@ export const AsideFilter = () => {
                 <div className="flex flex-col">
                   {filter.options.map((option: any) => {
                     return (
-                      // TODO: resetar checkbox apos limpar filtros
                       <FormControlLabel
                         key={option.value}
                         control={
                           <Checkbox
-                            {...register(option.value)}
                             value={option.value}
                             sx={{ padding: "4px" }}
+                            {...register(filter.key)}
                           />
                         }
                         label={option.label}
