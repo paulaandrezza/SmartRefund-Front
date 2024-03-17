@@ -1,3 +1,4 @@
+import { getCookie } from "@/utils/helpers/manageCookies";
 import { Add, Search } from "@mui/icons-material";
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import React from "react";
@@ -33,6 +34,20 @@ export const reciptData = {
 export const MainSection = () => {
   const [openModal, setOpenModal] = React.useState(false);
   const [showClearIcon, setShowClearIcon] = React.useState("none");
+  const [userType, setUserType] = React.useState<string | undefined>();
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const user_type = await getCookie();
+        setUserType(user_type.userType?.value);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setShowClearIcon(event.target.value === "" ? "none" : "flex");
@@ -63,10 +78,12 @@ export const MainSection = () => {
             }}
           />
 
-          <Button variant="contained" onClick={() => setOpenModal(true)}>
-            <Add />
-            Adicionar nota fiscal
-          </Button>
+          {userType === process.env.NEXT_PUBLIC_API_TOKEN_EMPLOYEE && (
+            <Button variant="contained" onClick={() => setOpenModal(true)}>
+              <Add />
+              Adicionar nota fiscal
+            </Button>
+          )}
         </div>
         <div className="flex flex-wrap justify-center gap-4">
           {Array(19)

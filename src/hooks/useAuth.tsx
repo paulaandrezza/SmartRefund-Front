@@ -1,10 +1,9 @@
 import { AuthServices } from "@/services/auth/auth_services";
-import { ApiLoginResponse, LoginForm } from "@/types/auth/login";
+import { LoginForm } from "@/types/auth/login";
 import { removeCookie, saveCookie } from "@/utils/helpers/manageCookies";
-import { createContext, useCallback, useContext, useState } from "react";
+import { createContext, useCallback, useContext } from "react";
 
 type IAuthContextData = {
-  userToken: ApiLoginResponse;
   handleLogin: (loginForm: LoginForm) => Promise<boolean>;
   handleLogout: () => void;
 };
@@ -12,17 +11,9 @@ type IAuthContextData = {
 const AuthContext = createContext({} as IAuthContextData);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-  const [userToken, setUserToken] = useState<ApiLoginResponse>(
-    {} as ApiLoginResponse,
-  );
-
   const handleLogin = async (loginForm: LoginForm) => {
     try {
       const { data } = await AuthServices.login(loginForm);
-
-      console.log(data);
-
-      setUserToken(data);
       if (data.token !== "") {
         saveCookie(data.token, data.userType);
       } else {
@@ -39,12 +30,11 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const handleLogout = useCallback(() => {
-    setUserToken({} as ApiLoginResponse);
     removeCookie();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ userToken, handleLogin, handleLogout }}>
+    <AuthContext.Provider value={{ handleLogin, handleLogout }}>
       {children}
     </AuthContext.Provider>
   );
