@@ -14,7 +14,7 @@ export const RefundCard = ({ cardInfo }: { cardInfo: ReciptDataType }) => {
     <Card
       sx={{ maxWidth: 300 }}
       className="cursor-pointer"
-      onClick={() => push(`${APP_ROUTES.private.refund}/${cardInfo.id}`)}
+      onClick={() => push(`${APP_ROUTES.private.refund}/${cardInfo.hash}`)}
     >
       <CardMedia
         component="img"
