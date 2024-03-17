@@ -42,7 +42,7 @@ export const MainSection = () => {
     <>
       <Box
         component="section"
-        className="h-full p-4 bg-slate-50 overflow-x-hidden"
+        className="h-full p-6 bg-slate-50 overflow-x-hidden"
         bgcolor="primary"
         style={{ gridArea: "mainSection" }}
       >
