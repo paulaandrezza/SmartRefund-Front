@@ -1,4 +1,4 @@
-export type ReciptData = {
+export type ReciptDataType = {
   id: number;
   hash: string;
   employeeId: number;

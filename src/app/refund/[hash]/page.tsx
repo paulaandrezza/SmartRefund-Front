@@ -2,6 +2,7 @@
 
 import { InfoSection } from "@/components/InfoSection";
 import { reciptData } from "@/components/MainSection";
+import { ChangeStatusModal } from "@/components/Modals/ChangeStatusModal";
 import { APP_ROUTES } from "@/utils/constants/app-routes";
 import {
   InternalReceiptStatusEnum,
@@ -16,25 +17,35 @@ import {
   Category,
   DateRange,
   Description,
+  Edit,
   Help,
   Info,
 } from "@mui/icons-material";
 import { Box, Button, Divider, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import React from "react";
 
 export default function Hash() {
   const { push } = useRouter();
+  const [statusModalOpen, setStatusModalOpen] = React.useState<boolean>(false);
 
   return (
     <main
       className="bg-slate-50 flex flex-col items-start p-8"
       style={{ gridArea: "main" }}
     >
-      <Button variant="text" onClick={() => push(APP_ROUTES.private.refund)}>
-        <ArrowBack />
-        Voltar à Página Anterior
-      </Button>
+      <div className="flex justify-between gap-4 w-full">
+        <Button variant="text" onClick={() => push(APP_ROUTES.private.refund)}>
+          <ArrowBack />
+          Voltar à Página Anterior
+        </Button>
+        <Button variant="contained" onClick={() => setStatusModalOpen(true)}>
+          <Edit />
+          Alterar status da solicitação
+        </Button>
+      </div>
+
       <div className="w-full flex flex-row p-8">
         <Box
           component="section"
@@ -107,7 +118,7 @@ export default function Hash() {
               <InfoSection
                 icon={<AttachMoney />}
                 label="Total"
-                value={`R$ ${reciptData.rawVision.translatedVision.total}`}
+                value={`R$ ${reciptData.rawVision.translatedVision.total.toFixed(2)}`}
               />
               <InfoSection
                 icon={<Info />}
@@ -133,7 +144,7 @@ export default function Hash() {
             </div>
           )}
 
-          {reciptData.rawVision.translatedVision && (
+          {reciptData.rawVision && (
             <div className="flex flex-col justify-start gap-2 w-2/3">
               <Typography variant="subtitle1" color="primary">
                 Resposta do ChatGPT Vision
@@ -142,7 +153,7 @@ export default function Hash() {
               <InfoSection
                 icon={<Help />}
                 label="É uma nota fiscal"
-                value={`R$ ${reciptData.rawVision.total}`}
+                value={reciptData.rawVision.isReceipt}
               />
               <InfoSection
                 icon={<Category />}
@@ -152,7 +163,7 @@ export default function Hash() {
               <InfoSection
                 icon={<AttachMoney />}
                 label="Total"
-                value={`R$ ${reciptData.rawVision.total}`}
+                value={reciptData.rawVision.total}
               />
               <InfoSection
                 icon={<Description />}
@@ -163,6 +174,10 @@ export default function Hash() {
           )}
         </Box>
       </div>
+      <ChangeStatusModal
+        open={statusModalOpen}
+        setIsOpen={setStatusModalOpen}
+      />
     </main>
   );
 }

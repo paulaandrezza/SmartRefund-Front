@@ -1,4 +1,4 @@
-import { ReciptData } from "@/types/refund/ReciptData";
+import { ReciptDataType } from "@/types/refund/ReciptDataType";
 import { APP_ROUTES } from "@/utils/constants/app-routes";
 import {
   InternalReceiptStatusEnum,
@@ -7,7 +7,7 @@ import {
 import { Card, CardContent, CardMedia, Chip, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 
-export const RefundCard = ({ cardInfo }: { cardInfo: ReciptData }) => {
+export const RefundCard = ({ cardInfo }: { cardInfo: ReciptDataType }) => {
   const { push } = useRouter();
 
   return (

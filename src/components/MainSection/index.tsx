@@ -1,7 +1,7 @@
 import { Add, Search } from "@mui/icons-material";
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import React from "react";
-import { AddReciptModal } from "../AddReciptModal";
+import { AddReciptModal } from "../Modals/AddReciptModal";
 import { RefundCard } from "../RefundCard";
 
 export const reciptData = {
