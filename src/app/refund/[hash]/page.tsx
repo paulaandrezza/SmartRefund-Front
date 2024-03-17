@@ -1,3 +1,7 @@
 export default function Hash() {
-  return <div>hash</div>;
+  return (
+    <main className="bg-slate-50" style={{ gridArea: "main" }}>
+      teste
+    </main>
+  );
 }

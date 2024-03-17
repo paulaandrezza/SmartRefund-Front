@@ -1,7 +1,6 @@
 "use client";
 
 import { AsideFilter } from "@/components/AsideFilter";
-import { Header } from "@/components/Header";
 import { MainSection } from "@/components/MainSection";
 import { Divider } from "@mui/material";
 
@@ -16,13 +15,10 @@ const gridStyles = {
 
 export default function Refund() {
   return (
-    <>
-      <Header />
-      <main className="bg-slate-50" style={gridStyles}>
-        <AsideFilter />
-        <Divider orientation="vertical" />
-        <MainSection />
-      </main>
-    </>
+    <main className="bg-slate-50" style={gridStyles}>
+      <AsideFilter />
+      <Divider orientation="vertical" />
+      <MainSection />
+    </main>
   );
 }

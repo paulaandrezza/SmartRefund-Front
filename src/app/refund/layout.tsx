@@ -1,3 +1,7 @@
+"use client";
+
+import { Header } from "@/components/Header";
+
 const gridStyles = {
   display: "grid",
   width: "100%",
@@ -11,5 +15,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <div style={gridStyles}>{children}</div>;
+  return (
+    <div style={gridStyles}>
+      <Header />
+      {children}
+    </div>
+  );
 }
