@@ -1,10 +1,21 @@
-import { RecipData } from "@/types/refund/ReciptData";
-import { InternalReceiptStatusEnum } from "@/utils/constants/enums";
+import { ReciptData } from "@/types/refund/ReciptData";
+import { APP_ROUTES } from "@/utils/constants/app-routes";
+import {
+  InternalReceiptStatusEnum,
+  StatusRefundEnum,
+} from "@/utils/constants/enums";
 import { Card, CardContent, CardMedia, Chip, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 
-export const RefundCard = ({ cardInfo }: { cardInfo: RecipData }) => {
+export const RefundCard = ({ cardInfo }: { cardInfo: ReciptData }) => {
+  const { push } = useRouter();
+
   return (
-    <Card sx={{ maxWidth: 300 }}>
+    <Card
+      sx={{ maxWidth: 300 }}
+      className="cursor-pointer"
+      onClick={() => push(`${APP_ROUTES.private.refund}/${cardInfo.id}`)}
+    >
       <CardMedia
         component="img"
         height="194"
@@ -18,7 +29,7 @@ export const RefundCard = ({ cardInfo }: { cardInfo: RecipData }) => {
         <Typography variant="body2">
           <b>Data de criação:</b> {cardInfo.creationDate.toLocaleString()}
         </Typography>
-        <div className="flex justify-end pt-2">
+        <div className="flex justify-end gap-2 pt-2">
           <Chip
             label={
               InternalReceiptStatusEnum[
@@ -31,6 +42,22 @@ export const RefundCard = ({ cardInfo }: { cardInfo: RecipData }) => {
               ].color
             }
           />
+          {cardInfo.rawVision?.translatedVision?.status && (
+            <Chip
+              label={
+                StatusRefundEnum[
+                  cardInfo.rawVision?.translatedVision
+                    ?.status as keyof typeof StatusRefundEnum
+                ].label
+              }
+              color={
+                StatusRefundEnum[
+                  cardInfo.rawVision?.translatedVision
+                    ?.status as keyof typeof StatusRefundEnum
+                ].color
+              }
+            />
+          )}
         </div>
       </CardContent>
     </Card>

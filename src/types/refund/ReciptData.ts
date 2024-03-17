@@ -1,4 +1,4 @@
-export type RecipData = {
+export type ReciptData = {
   id: number;
   hash: string;
   employeeId: number;
@@ -15,7 +15,7 @@ export type RecipData = {
     translatedVision?: {
       id: number;
       isReceipt: boolean;
-      Category: number;
+      category: number;
       status: number;
       total: number;
       description: string;

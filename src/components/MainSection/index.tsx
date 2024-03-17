@@ -4,13 +4,29 @@ import React from "react";
 import { AddReciptModal } from "../AddReciptModal";
 import { RefundCard } from "../RefundCard";
 
-const recipData = {
+const reciptData = {
   id: 1,
   hash: "AAABKJ",
   employeeId: 1,
   creationDate: new Date(),
-  status: 5,
+  status: 2,
   image: "/logo.png",
+  rawVision: {
+    id: 1,
+    isReceipt: "Sim",
+    category: "Alimentação",
+    total: "50.00",
+    description: "Reembolso de refeição",
+    isTranslated: true,
+    translatedVision: {
+      id: 1,
+      isReceipt: true,
+      category: 1,
+      status: 2,
+      total: 50,
+      description: "Reembolso de refeição",
+    },
+  },
 };
 
 export const MainSection = () => {
@@ -51,11 +67,11 @@ export const MainSection = () => {
             Adicionar nota fiscal
           </Button>
         </div>
-        <RefundCard cardInfo={recipData} />
-        <RefundCard cardInfo={recipData} />
-        <RefundCard cardInfo={recipData} />
-        <RefundCard cardInfo={recipData} />
-        <RefundCard cardInfo={recipData} />
+        <RefundCard cardInfo={reciptData} />
+        <RefundCard cardInfo={reciptData} />
+        <RefundCard cardInfo={reciptData} />
+        <RefundCard cardInfo={reciptData} />
+        <RefundCard cardInfo={reciptData} />
       </Box>
       <AddReciptModal open={openModal} setIsOpen={setOpenModal} />
     </>

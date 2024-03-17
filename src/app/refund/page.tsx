@@ -10,7 +10,7 @@ const gridStyles = {
   display: "grid",
   width: "100%",
   gridTemplateColumns: "260px 1fr",
-  gridTemplateAreas: "aside mainSection",
+  gridTemplateAreas: `"aside mainSection"`,
   gap: "32px",
 };
 
