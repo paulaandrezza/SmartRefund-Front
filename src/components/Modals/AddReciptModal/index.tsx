@@ -1,4 +1,5 @@
-import { RecipEntryType } from "@/types/refund/ReciptEntryType";
+import { EntryServices } from "@/services/recipt/entry_services";
+import { ReceipEntryType } from "@/types/refund/ReciptEntryType";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Box, Button, Modal, Typography, styled } from "@mui/material";
 import { useState } from "react";
@@ -39,14 +40,17 @@ export const AddReciptModal = ({ open, setIsOpen }: AddReciptModalProps) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<RecipEntryType>();
+  } = useForm<ReceipEntryType>();
   const [selectedFile, setSelectedFile] = useState<File>({} as File);
 
-  const onSubmit: SubmitHandler<RecipEntryType> = async (data) => {
+  const onSubmit: SubmitHandler<ReceipEntryType> = async (data) => {
     try {
-      console.log(`File: ${selectedFile}`);
-      console.log(`Form submission: ${JSON.stringify(data)}`);
-      toast.success("Nota fiscal enviada com sucesso!");
+      const receipEntryResponse = await EntryServices.sendReceipt({
+        file: selectedFile,
+      });
+      toast.success(
+        `Nota fiscal enviada com sucesso, o hash para acompanhar é: ${receipEntryResponse.data.uniqueHash}`,
+      );
       setIsOpen(false);
     } catch (error) {
       console.error("error:", error);
@@ -85,11 +89,11 @@ export const AddReciptModal = ({ open, setIsOpen }: AddReciptModalProps) => {
             variant="contained"
             color="secondary"
             tabIndex={-1}
-            {...register("file")}
             startIcon={<CloudUploadIcon />}
           >
             Upload imagem
             <VisuallyHiddenInput
+              {...register("file")}
               type="file"
               accept="image/png, image/jpg, image/jpeg"
               required
