@@ -3,6 +3,7 @@ import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Box, Button, Modal, Typography, styled } from "@mui/material";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const style = {
   position: "absolute" as "absolute",
@@ -45,9 +46,11 @@ export const AddReciptModal = ({ open, setIsOpen }: AddReciptModalProps) => {
     try {
       console.log(`File: ${selectedFile}`);
       console.log(`Form submission: ${JSON.stringify(data)}`);
+      toast.success("Nota fiscal enviada com sucesso!");
       setIsOpen(false);
     } catch (error) {
       console.error("error:", error);
+      toast.error(error);
     }
   };
 
