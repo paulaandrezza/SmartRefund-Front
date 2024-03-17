@@ -68,7 +68,7 @@ export default function Hash() {
           component="section"
           className="flex-1 flex flex-col justify-start items-center"
         >
-          <Image src="/nf.webp" alt="recipt" width={500} height={600} />
+          <Image src="/Nfe.png" alt="recipt" width={500} height={600} />
         </Box>
 
         <Box

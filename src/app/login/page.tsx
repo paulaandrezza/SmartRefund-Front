@@ -57,16 +57,31 @@ export default function Login() {
 
   return (
     <main style={gridStyles}>
-      <div className="bg-green-100 w-full h-full flex items-center justify-center">
-        <Image src="/logo.png" alt="logo" width={144} height={144} />
+      <div className="bg-green-50 w-full h-full flex flex-col items-center justify-center gap-4">
+        <Image src="/banner.svg" alt="logo" width={300} height={300} />
+        <span className="w-24 h-4 bg-[#bfe5cf] rounded-full" />
+        <div className="flex flex-col items-center justify-center gap-1 mt-4">
+          <Typography align="center" variant="body1">
+            Deixe a inteligência artificial cuidar das notas fiscais para você.
+          </Typography>
+          <Typography align="center" variant="body1">
+            <b>Processo de reembolso fácil e eficiente!</b>
+          </Typography>
+        </div>
       </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex w-96 flex-col justify-between items-center gap-10"
       >
-        <Image src="/logo.png" alt="logo" width={80} height={80} />
+        <div className="flex flex-col justify-center items-center gap-2">
+          <Image src="/logo.png" alt="logo" width={80} height={80} />
+          <Typography align="center" variant="h6" color="primary">
+            <b>Smart Refund</b>
+          </Typography>
+        </div>
         <Typography align="center" variant="body1">
-          <b>Faça login para acessar o Smart Refund</b>
+          Bem-vindo de volta! Por favor, faça login para continuar de onde
+          parou.
         </Typography>
         <div className="flex flex-col gap-8 w-full">
           <TextField
@@ -102,7 +117,7 @@ export default function Login() {
           />
         </div>
 
-        <Button type="submit" variant="contained">
+        <Button type="submit" variant="contained" className="w-full">
           Entrar
         </Button>
       </form>

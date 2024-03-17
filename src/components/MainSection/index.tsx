@@ -11,7 +11,7 @@ export const reciptData = {
   employeeId: 1,
   creationDate: new Date(),
   status: 2,
-  image: "/nf.webp",
+  image: "/Nfe.png",
   rawVision: {
     id: 1,
     isReceipt: "Sim",
