@@ -37,7 +37,10 @@ export const AsideFilter = () => {
   };
 
   return (
-    <aside className="h-full flex items-center justify-center pb-12 p-4 bg-[#e5f4eb]">
+    <aside
+      className="h-full flex items-center justify-center pb-12 p-4 fixed"
+      style={{ gridArea: "aside" }}
+    >
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         {Object.values(filters).map((filter: any) => {
           return (

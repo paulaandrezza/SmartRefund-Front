@@ -27,13 +27,14 @@ export const MainSection = () => {
         component="section"
         className="h-full p-4 flex flex-col gap-4"
         bgcolor="primary"
+        style={{ gridArea: "mainSection" }}
       >
-        <div className="flex justify-end gap-4">
+        <div className="flex justify-end flex-1 gap-4 sticky">
           <TextField
-            className="w-72"
+            size="small"
+            className="w-80"
             variant="outlined"
-            label="Pesquisar pelo hash"
-            placeholder="Insira a hash da nota fiscal"
+            placeholder="Pesquisar hash da nota fiscal"
             type="search"
             onChange={handleChange}
             InputProps={{
@@ -45,15 +46,15 @@ export const MainSection = () => {
             }}
           />
 
-          <Button variant="contained" color="secondary">
-            Pesquisar
-          </Button>
-
           <Button variant="contained" onClick={() => setOpenModal(true)}>
             <Add />
             Adicionar nota fiscal
           </Button>
         </div>
+        <RefundCard cardInfo={recipData} />
+        <RefundCard cardInfo={recipData} />
+        <RefundCard cardInfo={recipData} />
+        <RefundCard cardInfo={recipData} />
         <RefundCard cardInfo={recipData} />
       </Box>
       <AddReciptModal open={openModal} setIsOpen={setOpenModal} />

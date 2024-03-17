@@ -5,6 +5,13 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
+const gridStyles = {
+  display: "grid",
+  width: "100%",
+  gridTemplateColumns: "260px 1fr",
+  gap: "32px",
+};
+
 export const Header = () => {
   const router = useRouter();
   const { handleLogout } = useAuth();
@@ -16,22 +23,28 @@ export const Header = () => {
   };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box
+      sx={{
+        flexGrow: 1,
+        position: "fixed",
+        width: "100%",
+        zIndex: 1000,
+        gridArea: "header",
+      }}
+      className="z-10 sticky"
+    >
+      <AppBar position="static" sx={{ bgcolor: "white" }}>
         <Toolbar>
           <Image src="/logo.png" alt="logo" width={50} height={50} />
           <Typography
             variant="h6"
             component="div"
             sx={{ flexGrow: 1, paddingLeft: 4 }}
+            color="primary"
           >
             Smart Refund
           </Typography>
-          <Button
-            variant="contained"
-            color="secondary"
-            onClick={() => logoutHandler()}
-          >
+          <Button variant="contained" onClick={() => logoutHandler()}>
             Sair
           </Button>
         </Toolbar>

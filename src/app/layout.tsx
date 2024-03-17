@@ -23,7 +23,10 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <CssBaseline />
-      <body className={roboto.className} style={{ minHeight: "100vh" }}>
+      <body
+        className={roboto.className}
+        style={{ minHeight: "100vh", height: "100vh" }}
+      >
         <ApplicationContainer>{children}</ApplicationContainer>
       </body>
     </html>
