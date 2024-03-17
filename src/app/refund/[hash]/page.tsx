@@ -9,6 +9,7 @@ import {
   StatusRefundEnum,
   TranslatedVisionReceiptCategoryEnum,
 } from "@/utils/constants/enums";
+import { getCookie } from "@/utils/helpers/manageCookies";
 import {
   AcUnit,
   AccountCircle,
@@ -29,6 +30,20 @@ import React from "react";
 export default function Hash() {
   const { push } = useRouter();
   const [statusModalOpen, setStatusModalOpen] = React.useState<boolean>(false);
+  const [userType, setUserType] = React.useState<string | undefined>();
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const user_type = await getCookie();
+        setUserType(user_type.userType?.value);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <main
@@ -40,10 +55,12 @@ export default function Hash() {
           <ArrowBack />
           Voltar à Página Anterior
         </Button>
-        <Button variant="contained" onClick={() => setStatusModalOpen(true)}>
-          <Edit />
-          Alterar status da solicitação
-        </Button>
+        {userType === process.env.NEXT_PUBLIC_API_TOKEN_FINANCE_EMPLOYE && (
+          <Button variant="contained" onClick={() => setStatusModalOpen(true)}>
+            <Edit />
+            Alterar status da solicitação
+          </Button>
+        )}
       </div>
 
       <div className="w-full flex flex-row p-8">
