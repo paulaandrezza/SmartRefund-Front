@@ -1,14 +1,16 @@
 "use client";
 
 import { InfoSection } from "@/components/InfoSection";
-import { reciptData } from "@/components/MainSection";
 import { ChangeStatusModal } from "@/components/Modals/ChangeStatusModal";
+import { EventSourceServices } from "@/services/recipt/eventSource_services";
+import { ReceiptDataType } from "@/types/refund/EventSourceType";
 import { APP_ROUTES } from "@/utils/constants/app-routes";
 import {
   InternalReceiptStatusEnum,
   StatusRefundEnum,
   TranslatedVisionReceiptCategoryEnum,
 } from "@/utils/constants/enums";
+import { formattedDate } from "@/utils/helpers/formattedDate";
 import { getCookie } from "@/utils/helpers/manageCookies";
 import {
   AcUnit,
@@ -27,10 +29,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-export default function Hash() {
+export default function Hash({ params }: { params: { hash: string } }) {
   const { push } = useRouter();
   const [statusModalOpen, setStatusModalOpen] = React.useState<boolean>(false);
   const [userType, setUserType] = React.useState<string | undefined>();
+  const [receiptData, setReceiptData] = React.useState<ReceiptDataType>();
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -42,7 +45,19 @@ export default function Hash() {
       }
     };
 
+    const fetchReceiptData = async () => {
+      try {
+        const data = await EventSourceServices.getReceiptByHash(params.hash);
+        console.log(data.data);
+        setReceiptData(data.data);
+        console.log(data);
+      } catch (error) {
+        console.error("Erro ao buscar notas fiscais:", error);
+      }
+    };
+
     fetchData();
+    fetchReceiptData();
   }, []);
 
   return (
@@ -68,7 +83,15 @@ export default function Hash() {
           component="section"
           className="flex-1 flex flex-col justify-start items-center"
         >
-          <Image src="/Nfe.png" alt="recipt" width={500} height={600} />
+          {receiptData?.internalReceipt.image && (
+            <Image
+              src="/logo.png"
+              // src={receiptData.internalReceipt.image || "/logo.png"}
+              alt="Nota fiscal"
+              width={500}
+              height={600}
+            />
+          )}
         </Box>
 
         <Box
@@ -83,112 +106,117 @@ export default function Hash() {
             <InfoSection
               icon={<AcUnit />}
               label="Hash"
-              value={reciptData.hash}
+              value={receiptData?.internalReceipt.uniqueHash}
             />
             <InfoSection
               icon={<AccountCircle />}
               label="Id do funcionário"
-              value={reciptData.id}
+              value={receiptData?.internalReceipt.employeeId}
             />
             <InfoSection
               icon={<DateRange />}
               label="Data de criação"
-              value={reciptData.creationDate.toLocaleString()}
+              value={formattedDate(receiptData?.internalReceipt.creationDate)}
             />
-            <InfoSection
-              icon={<Info />}
-              label="Status"
-              chip={{
-                label:
-                  InternalReceiptStatusEnum[
-                    reciptData.status as keyof typeof InternalReceiptStatusEnum
-                  ].label,
-                color:
-                  InternalReceiptStatusEnum[
-                    reciptData.status as keyof typeof InternalReceiptStatusEnum
-                  ].color,
-              }}
-            />
+            {receiptData?.internalReceipt.status && (
+              <InfoSection
+                icon={<Info />}
+                label="Status"
+                chip={{
+                  label:
+                    InternalReceiptStatusEnum[
+                      receiptData?.internalReceipt
+                        .status as keyof typeof InternalReceiptStatusEnum
+                    ].label,
+                  color:
+                    InternalReceiptStatusEnum[
+                      receiptData?.internalReceipt
+                        .status as keyof typeof InternalReceiptStatusEnum
+                    ].color,
+                }}
+              />
+            )}
           </div>
-          {reciptData.rawVision.translatedVision && (
-            <div className="flex flex-col justify-start gap-2 w-2/3">
-              <Typography variant="subtitle1" color="primary">
-                Resultado da solicitação
-              </Typography>
-              <Divider />
+
+          <div className="flex flex-col justify-start gap-2 w-2/3">
+            <Typography variant="subtitle1" color="primary">
+              Resultado da solicitação
+            </Typography>
+            <Divider />
+            {receiptData?.translatedVision.category !== undefined && (
               <InfoSection
                 icon={<Category />}
                 label="Categoria"
                 chip={{
                   label:
                     TranslatedVisionReceiptCategoryEnum[
-                      reciptData.rawVision.translatedVision
+                      receiptData.translatedVision
                         .category as keyof typeof TranslatedVisionReceiptCategoryEnum
                     ].label,
                   color:
-                    InternalReceiptStatusEnum[
-                      reciptData.rawVision.translatedVision
+                    TranslatedVisionReceiptCategoryEnum[
+                      receiptData.translatedVision
                         .category as keyof typeof TranslatedVisionReceiptCategoryEnum
                     ].color,
                 }}
               />
-              <InfoSection
-                icon={<AttachMoney />}
-                label="Total"
-                value={`R$ ${reciptData.rawVision.translatedVision.total.toFixed(2)}`}
-              />
+            )}
+            <InfoSection
+              icon={<AttachMoney />}
+              label="Total"
+              value={`R$ ${receiptData?.translatedVision.total.toFixed(2)}`}
+            />
+            {receiptData?.translatedVision.status !== undefined && (
               <InfoSection
                 icon={<Info />}
                 label="Status da solicitação"
                 chip={{
                   label:
                     StatusRefundEnum[
-                      reciptData.rawVision.translatedVision
+                      receiptData.translatedVision
                         .status as keyof typeof StatusRefundEnum
                     ].label,
                   color:
                     StatusRefundEnum[
-                      reciptData.rawVision.translatedVision
+                      receiptData.translatedVision
                         .status as keyof typeof StatusRefundEnum
                     ].color,
                 }}
               />
-              <InfoSection
-                icon={<Description />}
-                label="Descrição"
-                value={reciptData.rawVision.translatedVision.description}
-              />
-            </div>
-          )}
+            )}
+            <InfoSection
+              icon={<Description />}
+              label="Descrição"
+              value={receiptData?.translatedVision.description}
+            />
+          </div>
 
-          {reciptData.rawVision && (
-            <div className="flex flex-col justify-start gap-2 w-2/3">
-              <Typography variant="subtitle1" color="primary">
-                Resposta do ChatGPT Vision
-              </Typography>
-              <Divider />
-              <InfoSection
-                icon={<Help />}
-                label="É uma nota fiscal"
-                value={reciptData.rawVision.isReceipt}
-              />
-              <InfoSection
-                icon={<Category />}
-                label="Categoria"
-                value={reciptData.rawVision.category}
-              />
-              <InfoSection
-                icon={<AttachMoney />}
-                label="Total"
-                value={reciptData.rawVision.total}
-              />
-              <InfoSection
-                icon={<Description />}
-                label="Descrição"
-                value={reciptData.rawVision.description}
-              />
-            </div>
-          )}
+          <div className="flex flex-col justify-start gap-2 w-2/3">
+            <Typography variant="subtitle1" color="primary">
+              Resposta do ChatGPT Vision
+            </Typography>
+            <Divider />
+            <InfoSection
+              icon={<Help />}
+              label="É uma nota fiscal"
+              value={receiptData?.rawVision.isReceipt}
+            />
+            <InfoSection
+              icon={<Category />}
+              label="Categoria"
+              value={receiptData?.rawVision.category}
+            />
+            <InfoSection
+              icon={<AttachMoney />}
+              label="Total"
+              value={receiptData?.rawVision.total}
+            />
+            <InfoSection
+              icon={<Description />}
+              label="Descrição"
+              value={receiptData?.rawVision.description}
+            />
+          </div>
         </Box>
       </div>
       <ChangeStatusModal

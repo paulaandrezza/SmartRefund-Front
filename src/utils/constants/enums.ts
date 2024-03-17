@@ -1,4 +1,5 @@
 export const InternalReceiptStatusEnum = {
+  0: { label: "Não definido", color: "error" },
   1: { label: "Não processado", color: "info" },
   2: { label: "Sucesso", color: "primary" },
   3: { label: "Falhou uma vez", color: "warning" },
@@ -8,6 +9,7 @@ export const InternalReceiptStatusEnum = {
 } as const;
 
 export const TranslatedVisionReceiptCategoryEnum = {
+  0: { label: "Não definido", color: "error" },
   1: { label: "Hospedagem", color: "info" },
   2: { label: "Transporte", color: "primary" },
   3: { label: "Viagem", color: "warning" },
@@ -16,6 +18,7 @@ export const TranslatedVisionReceiptCategoryEnum = {
 } as const;
 
 export const StatusRefundEnum = {
+  0: { label: "Não definido", color: "error" },
   1: { label: "Submetido", color: "info" },
   2: { label: "Pago", color: "primary" },
   3: { label: "Recusado", color: "error" },

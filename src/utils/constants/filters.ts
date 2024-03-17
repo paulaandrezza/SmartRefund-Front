@@ -36,7 +36,7 @@ export const filters = {
       },
       {
         label: "Erro da tradução",
-        value: "0",
+        value: "2",
       },
     ],
   },

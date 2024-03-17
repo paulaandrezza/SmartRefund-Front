@@ -1,4 +1,5 @@
-export const formattedDate = (date: Date) => {
+export const formattedDate = (date: Date | undefined): string | undefined => {
+  if (!date) return;
   return new Date(date).toLocaleString("pt-BR", {
     day: "2-digit",
     month: "2-digit",
