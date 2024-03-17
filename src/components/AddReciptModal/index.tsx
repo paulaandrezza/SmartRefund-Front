@@ -50,7 +50,7 @@ export const AddReciptModal = ({ open, setIsOpen }: AddReciptModalProps) => {
       setIsOpen(false);
     } catch (error) {
       console.error("error:", error);
-      toast.error(error);
+      toast.error(`${error}`);
     }
   };
 
