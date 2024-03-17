@@ -41,11 +41,11 @@ export const MainSection = () => {
     <>
       <Box
         component="section"
-        className="h-full p-4 flex flex-col gap-4"
+        className="h-full p-4 bg-slate-50 overflow-x-hidden"
         bgcolor="primary"
         style={{ gridArea: "mainSection" }}
       >
-        <div className="flex justify-end flex-1 gap-4 sticky">
+        <div className="flex justify-end flex-1 gap-4 sticky pb-4">
           <TextField
             size="small"
             className="w-80"
@@ -67,11 +67,13 @@ export const MainSection = () => {
             Adicionar nota fiscal
           </Button>
         </div>
-        <RefundCard cardInfo={reciptData} />
-        <RefundCard cardInfo={reciptData} />
-        <RefundCard cardInfo={reciptData} />
-        <RefundCard cardInfo={reciptData} />
-        <RefundCard cardInfo={reciptData} />
+        <div className="flex flex-wrap justify-center gap-4">
+          {Array(19)
+            .fill(19)
+            .map((_, index) => (
+              <RefundCard key={index} cardInfo={reciptData} />
+            ))}
+        </div>
       </Box>
       <AddReciptModal open={openModal} setIsOpen={setOpenModal} />
     </>
