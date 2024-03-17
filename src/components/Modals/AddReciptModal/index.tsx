@@ -2,6 +2,7 @@ import { EntryServices } from "@/services/recipt/entry_services";
 import { ReceipEntryType } from "@/types/refund/ReciptEntryType";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
 import { Box, Button, Modal, Typography, styled } from "@mui/material";
+import Image from "next/image";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
@@ -42,6 +43,7 @@ export const AddReciptModal = ({ open, setIsOpen }: AddReciptModalProps) => {
     formState: { errors },
   } = useForm<ReceipEntryType>();
   const [selectedFile, setSelectedFile] = useState<File>({} as File);
+  const [previewImage, setPreviewImage] = useState<string>("");
 
   const onSubmit: SubmitHandler<ReceipEntryType> = async (data) => {
     try {
@@ -62,8 +64,10 @@ export const AddReciptModal = ({ open, setIsOpen }: AddReciptModalProps) => {
     const files = e.target.files;
     if (files && files.length > 0) {
       setSelectedFile(files[0]);
+      setPreviewImage(URL.createObjectURL(files[0]));
     } else {
       setSelectedFile({} as File);
+      setPreviewImage("");
     }
   };
 
@@ -103,6 +107,17 @@ export const AddReciptModal = ({ open, setIsOpen }: AddReciptModalProps) => {
           <Typography variant="body2" className="pb-4">
             {selectedFile.name}
           </Typography>
+          {previewImage && (
+            <div className="text-center">
+              <Image
+                src={previewImage}
+                alt="Preview"
+                width={600}
+                height={700}
+                className="w-96 h-full rounded-md"
+              />
+            </div>
+          )}
 
           <Button type="submit" variant="contained">
             Adicionar

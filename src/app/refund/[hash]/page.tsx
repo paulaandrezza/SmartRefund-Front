@@ -88,8 +88,9 @@ export default function Hash({ params }: { params: { hash: string } }) {
               src="/logo.png"
               // src={receiptData.internalReceipt.image || "/logo.png"}
               alt="Nota fiscal"
-              width={500}
-              height={600}
+              width={600}
+              height={700}
+              className="w-[400px] h-full"
             />
           )}
         </Box>
