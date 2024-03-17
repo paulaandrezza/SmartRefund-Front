@@ -14,8 +14,8 @@ export const AuthServices = {
 
   async isAuthenticated(): Promise<boolean> {
     try {
-      const token = await getCookie();
-      return !!token;
+      const cookie = await getCookie();
+      return !!cookie;
     } catch (error) {
       return false;
     }

@@ -9,5 +9,5 @@ export type LoginFormResponse = {
 
 export type ApiLoginResponse = {
   token: string;
-  user_type: string;
+  userType: string;
 };

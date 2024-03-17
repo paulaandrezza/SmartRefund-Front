@@ -7,10 +7,10 @@ export const api = axios.create({
 
 api.interceptors.request.use(
   async (config) => {
-    const token = await getCookie();
+    const cookie = await getCookie();
 
-    if (token !== undefined) {
-      const auth = `Bearer ${token.value}`;
+    if (cookie.userToken !== undefined) {
+      const auth = `Bearer ${cookie.userToken.value}`;
       config.headers["Authorization"] = auth;
     }
 

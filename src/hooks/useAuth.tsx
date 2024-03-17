@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
       setUserToken(data);
       if (data.token !== "") {
-        saveCookie(data.token);
+        saveCookie(data.token, data.userType);
       } else {
         throw new Error(
           "Token not found for the provided user type. Check the .env.local file",
