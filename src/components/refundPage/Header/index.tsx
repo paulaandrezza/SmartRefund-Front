@@ -28,7 +28,13 @@ export const Header = () => {
     >
       <AppBar position="static" sx={{ bgcolor: "white" }}>
         <Toolbar>
-          <Image src="/logo.png" alt="logo" width={50} height={50} />
+          <Image
+            src="/logo_without_name.png"
+            alt="logo"
+            width={200}
+            height={200}
+            className="w-12 h-12 object-cover"
+          />
           <Typography
             variant="h6"
             component="div"
