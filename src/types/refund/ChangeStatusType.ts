@@ -1,6 +1,6 @@
 export type ChangeStatusType = {
   uniqueHash: string;
-  status: number;
+  newStatus: number;
 };
 
 export type ChangeStatusResponseType = {

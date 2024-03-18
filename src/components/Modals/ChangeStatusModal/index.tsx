@@ -38,7 +38,7 @@ type changeStatusModalProps = {
 
 const changeStatusModalSchema = yup.object().shape({
   uniqueHash: yup.string().required(),
-  status: yup
+  newStatus: yup
     .number()
     .typeError("O status é obrigatório")
     .required("O status é obrigatório")
@@ -93,13 +93,13 @@ export const ChangeStatusModal = ({
             Selecione o status atual dessa solicitação
           </Typography>
 
-          <FormControl fullWidth error={!!errors.status?.message}>
+          <FormControl fullWidth error={!!errors.newStatus?.message}>
             <InputLabel id="demo-simple-select-label">Status</InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               label="Status"
-              {...register("status")}
+              {...register("newStatus")}
             >
               {filters.optionsStatusRefund.options.map(
                 (option: optionsType) => (
@@ -109,7 +109,7 @@ export const ChangeStatusModal = ({
                 ),
               )}
             </Select>
-            <FormHelperText error>{errors.status?.message}</FormHelperText>
+            <FormHelperText error>{errors.newStatus?.message}</FormHelperText>
           </FormControl>
 
           <Button type="submit" variant="contained">
