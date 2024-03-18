@@ -57,7 +57,7 @@ export const LoginSide = () => {
           alt="logo"
           width={200}
           height={200}
-          className="object-contain w-40 h-48"
+          className="object-contain w-40 h-40"
         />
       </div>
       <Typography align="center" variant="body1">
