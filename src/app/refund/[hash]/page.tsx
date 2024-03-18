@@ -68,12 +68,16 @@ export default function Hash({ params }: { params: { hash: string } }) {
           <ArrowBack />
           Voltar à Página Anterior
         </Button>
-        {userType === process.env.NEXT_PUBLIC_API_TOKEN_FINANCE_EMPLOYE && (
-          <Button variant="contained" onClick={() => setStatusModalOpen(true)}>
-            <Edit />
-            Alterar status da solicitação
-          </Button>
-        )}
+        {userType === process.env.NEXT_PUBLIC_API_TOKEN_FINANCE_EMPLOYE &&
+          receiptData?.translatedVision.status === 1 && (
+            <Button
+              variant="contained"
+              onClick={() => setStatusModalOpen(true)}
+            >
+              <Edit />
+              Alterar status da solicitação
+            </Button>
+          )}
       </div>
 
       <div className="w-full flex flex-col gap-4 md:p-8 md:flex-row">
