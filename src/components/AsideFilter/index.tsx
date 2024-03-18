@@ -49,7 +49,7 @@ export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
 
   return (
     <aside
-      className="h-full flex items-center justify-center py-20 px-8 fixed overflow-y-auto"
+      className="h-full flex items-center justify-center py-20 px-8 fixed overflow-y-auto bg-[#e5f4eb]"
       style={{ gridArea: "aside" }}
     >
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
@@ -96,7 +96,6 @@ export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
           </Button>
         </div>
       </form>
-      <Divider orientation="vertical" className="relative -right-12" />
     </aside>
   );
 };
