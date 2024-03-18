@@ -1,7 +1,7 @@
 "use client";
 
-import { AsideFilter } from "@/components/AsideFilter";
-import { MainSection } from "@/components/MainSection";
+import { AsideFilter } from "@/components/refundPage/AsideFilter";
+import { MainSection } from "@/components/refundPage/MainSection";
 import { EventSourceServices } from "@/services/recipt/eventSource_services";
 import { AllReceiptDataType } from "@/types/refund/EventSourceType";
 import { FetchReceiptsDataOptions } from "@/types/refund/ReciptValidationType";

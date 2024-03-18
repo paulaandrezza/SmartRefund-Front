@@ -3,8 +3,8 @@ import { getCookie } from "@/utils/helpers/manageCookies";
 import { Add, RefreshRounded, Search } from "@mui/icons-material";
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import React from "react";
-import { AddReciptModal } from "../Modals/AddReciptModal";
-import { RefundCard } from "../RefundCard";
+import { AddReciptModal } from "../../Modals/AddReciptModal";
+import { RefundCard } from "../../RefundCard";
 
 interface MainSectionProps {
   receiptsData: AllReceiptDataType | undefined;
