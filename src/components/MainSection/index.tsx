@@ -64,7 +64,7 @@ export const MainSection = ({
         <div className="flex justify-end items-center flex-1 gap-4 sticky pb-4">
           <div
             className="flex items-center justify-center cursor-pointer"
-            onClick={() => fetchReceiptsData()}
+            onClick={() => window.location.reload()}
           >
             <RefreshRounded color="primary" fontSize="large" />
           </div>
