@@ -59,11 +59,17 @@ export const AddReciptModal = ({
         `Nota fiscal enviada com sucesso, o hash para acompanhar é: ${receipEntryResponse.data.uniqueHash}`,
       );
       fetchReceiptsData();
-      setIsOpen(false);
+      handleCloseModal();
     } catch (error) {
       console.error("error:", error);
       toast.error(`${error}`);
     }
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
+    setPreviewImage("");
+    setSelectedFile({} as File);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -80,7 +86,7 @@ export const AddReciptModal = ({
   return (
     <Modal
       open={open}
-      onClose={() => setIsOpen(false)}
+      onClose={handleCloseModal}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
