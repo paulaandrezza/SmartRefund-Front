@@ -23,6 +23,10 @@ export const filters: Record<FilterOptionKey, FilterOption> = {
         label: "Sem sucesso",
         value: "5",
       },
+      {
+        label: "Falha na autenticação do Vision",
+        value: "6",
+      },
     ],
   },
 

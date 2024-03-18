@@ -1,4 +1,4 @@
-import { ReciptValidationType } from "@/types/refund/ReciptValidationType";
+import { FetchReceiptsDataOptions } from "@/types/refund/ReciptValidationType";
 import { FilterOption, filters, optionsType } from "@/utils/constants/filters";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
@@ -19,19 +19,24 @@ const asideFilterSchema = yup.object().shape({
   optionsStatusRefund: yup.array().of(yup.number()),
 });
 
-export const AsideFilter = () => {
+interface AsideFilterProps {
+  fetchReceiptsData: (options?: FetchReceiptsDataOptions) => void;
+}
+
+export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
   const [resetFilter, setResetFilters] = React.useState(false);
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<ReciptValidationType>({
+  } = useForm<FetchReceiptsDataOptions>({
     resolver: yupResolver(asideFilterSchema),
   });
 
-  const onSubmit: SubmitHandler<ReciptValidationType> = async (data) => {
+  const onSubmit: SubmitHandler<FetchReceiptsDataOptions> = async (data) => {
     console.log(data);
+    fetchReceiptsData(data);
     try {
       console.log(`Form submission: ${JSON.stringify(data)}`);
     } catch (error) {

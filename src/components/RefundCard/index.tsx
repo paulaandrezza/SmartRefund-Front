@@ -14,9 +14,6 @@ interface RefundCardProps {
 
 export const RefundCard = ({ cardInfo }: RefundCardProps) => {
   const { push } = useRouter();
-
-  console.log(`cardInfo: ${cardInfo.internalReceipt.uniqueHash}`);
-
   return (
     <Card
       sx={{ maxWidth: 300 }}
