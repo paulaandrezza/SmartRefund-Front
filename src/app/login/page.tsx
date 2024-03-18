@@ -78,6 +78,7 @@ export default function Login() {
           <TextField
             id="input-with-icon-textfield"
             label="Username"
+            placeholder="Insira o username"
             variant="outlined"
             {...register("username")}
             InputProps={{
@@ -94,6 +95,7 @@ export default function Login() {
             type="password"
             id="input-with-icon-textfield"
             label="Senha"
+            placeholder="Insira a senha"
             variant="outlined"
             {...register("password")}
             InputProps={{
