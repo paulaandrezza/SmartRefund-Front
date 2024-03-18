@@ -8,11 +8,14 @@ import { RefundCard } from "../RefundCard";
 
 interface MainSectionProps {
   receiptsData: AllReceiptDataType | undefined;
+  fetchReceiptsData: () => void;
 }
 
-export const MainSection = ({ receiptsData }: MainSectionProps) => {
+export const MainSection = ({
+  receiptsData,
+  fetchReceiptsData,
+}: MainSectionProps) => {
   const [openModal, setOpenModal] = React.useState(false);
-  const [showClearIcon, setShowClearIcon] = React.useState("none");
   const [userType, setUserType] = React.useState<string | undefined>();
   const [filteredReceiptsData, setFilteredReceiptsData] = React.useState<
     AllReceiptDataType | undefined
@@ -33,7 +36,6 @@ export const MainSection = ({ receiptsData }: MainSectionProps) => {
 
   React.useEffect(() => {
     setFilteredReceiptsData(receiptsData);
-    console.log(receiptsData);
   }, [receiptsData]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -89,7 +91,11 @@ export const MainSection = ({ receiptsData }: MainSectionProps) => {
           ))}
         </div>
       </Box>
-      <AddReciptModal open={openModal} setIsOpen={setOpenModal} />
+      <AddReciptModal
+        open={openModal}
+        setIsOpen={setOpenModal}
+        fetchReceiptsData={fetchReceiptsData}
+      />
     </>
   );
 };

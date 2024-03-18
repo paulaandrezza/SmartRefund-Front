@@ -9,23 +9,26 @@ import React from "react";
 export default function Refund() {
   const [receiptsData, setReceiptsData] = React.useState<AllReceiptDataType>();
 
-  React.useEffect(() => {
-    const fetchReceiptsData = async () => {
-      try {
-        const data = await EventSourceServices.getAllReceipts();
-        setReceiptsData(data.data);
-      } catch (error) {
-        console.error("Erro ao buscar notas fiscais:", error);
-      }
-    };
+  const fetchReceiptsData = async () => {
+    try {
+      const data = await EventSourceServices.getAllReceipts();
+      setReceiptsData(data.data);
+    } catch (error) {
+      console.error("Erro ao buscar notas fiscais:", error);
+    }
+  };
 
+  React.useEffect(() => {
     fetchReceiptsData();
   }, []);
 
   return (
     <main className="refund-grid-container bg-slate-50">
       <AsideFilter />
-      <MainSection receiptsData={receiptsData} />
+      <MainSection
+        receiptsData={receiptsData}
+        fetchReceiptsData={fetchReceiptsData}
+      />
     </main>
   );
 }

@@ -48,9 +48,7 @@ export default function Hash({ params }: { params: { hash: string } }) {
     const fetchReceiptData = async () => {
       try {
         const data = await EventSourceServices.getReceiptByHash(params.hash);
-        console.log(data.data);
         setReceiptData(data.data);
-        console.log(data);
       } catch (error) {
         console.error("Erro ao buscar notas fiscais:", error);
       }

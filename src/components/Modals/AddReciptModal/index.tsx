@@ -22,6 +22,7 @@ const style = {
 type AddReciptModalProps = {
   open: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  fetchReceiptsData: () => void;
 };
 
 const VisuallyHiddenInput = styled("input")({
@@ -36,7 +37,11 @@ const VisuallyHiddenInput = styled("input")({
   width: 1,
 });
 
-export const AddReciptModal = ({ open, setIsOpen }: AddReciptModalProps) => {
+export const AddReciptModal = ({
+  open,
+  setIsOpen,
+  fetchReceiptsData,
+}: AddReciptModalProps) => {
   const {
     register,
     handleSubmit,
@@ -53,6 +58,7 @@ export const AddReciptModal = ({ open, setIsOpen }: AddReciptModalProps) => {
       toast.success(
         `Nota fiscal enviada com sucesso, o hash para acompanhar é: ${receipEntryResponse.data.uniqueHash}`,
       );
+      fetchReceiptsData();
       setIsOpen(false);
     } catch (error) {
       console.error("error:", error);
