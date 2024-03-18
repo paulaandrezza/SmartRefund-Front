@@ -24,12 +24,13 @@ interface AsideFilterProps {
 }
 
 export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
-  const [resetFilter, setResetFilters] = React.useState(false);
+  // const [resetFilter, setResetFilters] = React.useState(false);
   const {
     register,
     handleSubmit,
-    reset,
-    formState: { errors },
+    watch,
+    setValue,
+    // reset,
   } = useForm<FetchReceiptsDataOptions>({
     resolver: yupResolver(asideFilterSchema),
   });
@@ -38,7 +39,7 @@ export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
 
   const onSubmit: SubmitHandler<FetchReceiptsDataOptions> = async (data) => {
     console.log("submit");
-    fetchReceiptsData(data);
+    await fetchReceiptsData(data);
   };
 
   // const handleReset = () => {
@@ -46,6 +47,12 @@ export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
   //   setResetFilters(true);
   //   console.log("reset");
   // };
+
+  React.useEffect(() => {
+    setValue("optionsStatusGPT", []);
+    setValue("optionsStatusRefund", []);
+    setValue("optionsStatusTranslate", []);
+  }, []);
 
   return (
     <aside
@@ -55,12 +62,8 @@ export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
         {Object.values(filters).map((filter: FilterOption) => {
           return (
-            <>
-              <FormControl
-                size={"small"}
-                variant={"outlined"}
-                key={filter.label}
-              >
+            <React.Fragment key={filter.key}>
+              <FormControl size={"small"} variant={"outlined"}>
                 <FormLabel component="legend">
                   <b>{filter.label}</b>
                 </FormLabel>
@@ -83,7 +86,7 @@ export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
                 </div>
               </FormControl>
               <Divider />
-            </>
+            </React.Fragment>
           );
         })}
 
