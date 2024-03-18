@@ -41,11 +41,11 @@ export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
     fetchReceiptsData(data);
   };
 
-  const handleReset = () => {
-    reset();
-    setResetFilters(true);
-    console.log("reset");
-  };
+  // const handleReset = () => {
+  //   reset();
+  //   setResetFilters(true);
+  //   console.log("reset");
+  // };
 
   return (
     <aside
@@ -91,9 +91,9 @@ export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
           <Button type="submit" variant="contained">
             Aplicar filtros
           </Button>
-          <Button type="button" variant="outlined" onClick={handleReset}>
+          {/* <Button type="button" variant="outlined" onClick={handleReset}>
             Limpar filtros
-          </Button>
+          </Button> */}
         </div>
       </form>
     </aside>
