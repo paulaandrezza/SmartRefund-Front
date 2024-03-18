@@ -1,6 +1,19 @@
+import { StatusServices } from "@/services/recipt/status_service";
 import { ChangeStatusType } from "@/types/refund/ChangeStatusType";
+import { filters, optionsType } from "@/utils/constants/filters";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Box, Button, Modal, Typography, styled } from "@mui/material";
+import {
+  Box,
+  Button,
+  FormControl,
+  FormHelperText,
+  InputLabel,
+  MenuItem,
+  Modal,
+  Select,
+  Typography,
+} from "@mui/material";
+import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import * as yup from "yup";
@@ -20,31 +33,28 @@ const style = {
 type changeStatusModalProps = {
   open: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  uniqueHash: string;
 };
 
-const VisuallyHiddenInput = styled("input")({
-  clip: "rect(0 0 0 0)",
-  clipPath: "inset(50%)",
-  height: 1,
-  overflow: "hidden",
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  whiteSpace: "nowrap",
-  width: 1,
-});
-
 const changeStatusModalSchema = yup.object().shape({
-  status: yup.number().required("status obrigatório").min(1),
+  uniqueHash: yup.string().required(),
+  status: yup
+    .number()
+    .typeError("O status é obrigatório")
+    .required("O status é obrigatório")
+    .min(1, "O status é obrigatório"),
 });
 
 export const ChangeStatusModal = ({
   open,
   setIsOpen,
+  uniqueHash,
 }: changeStatusModalProps) => {
   const {
     register,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm<ChangeStatusType>({
     resolver: yupResolver(changeStatusModalSchema),
@@ -52,14 +62,20 @@ export const ChangeStatusModal = ({
 
   const onSubmit: SubmitHandler<ChangeStatusType> = async (data) => {
     try {
-      console.log(`Form submission: ${JSON.stringify(data)}`);
-      toast.success("Status atualizado com sucesso!");
+      const changeStatusResponse = await StatusServices.changeStatus(data);
+      toast.success(
+        `Status da nota fiscal ${changeStatusResponse.data.uniqueHash} atualizado com sucesso!`,
+      );
       setIsOpen(false);
     } catch (error) {
       console.error("error:", error);
       toast.error(`${error}`);
     }
   };
+
+  React.useEffect(() => {
+    setValue("uniqueHash", uniqueHash);
+  }, []);
 
   return (
     <Modal
@@ -76,6 +92,25 @@ export const ChangeStatusModal = ({
           <Typography id="modal-modal-description" sx={{ mt: 2 }}>
             Selecione o status atual dessa solicitação
           </Typography>
+
+          <FormControl fullWidth error={!!errors.status?.message}>
+            <InputLabel id="demo-simple-select-label">Status</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              label="Status"
+              {...register("status")}
+            >
+              {filters.optionsStatusRefund.options.map(
+                (option: optionsType) => (
+                  <MenuItem key={option.value} value={option.value}>
+                    {option.label}
+                  </MenuItem>
+                ),
+              )}
+            </Select>
+            <FormHelperText error>{errors.status?.message}</FormHelperText>
+          </FormControl>
 
           <Button type="submit" variant="contained">
             Alterar

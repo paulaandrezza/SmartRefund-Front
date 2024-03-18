@@ -223,6 +223,7 @@ export default function Hash({ params }: { params: { hash: string } }) {
       <ChangeStatusModal
         open={statusModalOpen}
         setIsOpen={setStatusModalOpen}
+        uniqueHash={params.hash}
       />
     </main>
   );
