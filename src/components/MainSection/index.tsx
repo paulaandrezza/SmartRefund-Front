@@ -86,7 +86,7 @@ export const MainSection = ({
           )}
         </div>
         <div className="flex flex-wrap justify-center gap-4">
-          {receiptsData?.map((receiptData, index) => (
+          {filteredReceiptsData?.map((receiptData, index) => (
             <RefundCard key={index} cardInfo={receiptData} />
           ))}
         </div>
