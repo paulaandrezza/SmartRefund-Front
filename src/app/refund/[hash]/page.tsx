@@ -62,7 +62,7 @@ export default function Hash({ params }: { params: { hash: string } }) {
 
   return (
     <main
-      className="bg-slate-50 flex flex-col items-start p-8"
+      className="bg-slate-50 flex flex-col items-start p-4 md:p-8"
       style={{ gridArea: "main" }}
     >
       <div className="flex justify-between gap-4 w-full">
@@ -78,7 +78,7 @@ export default function Hash({ params }: { params: { hash: string } }) {
         )}
       </div>
 
-      <div className="w-full flex flex-row p-8">
+      <div className="w-full flex flex-col md:p-8 md:flex-row">
         <Box
           component="section"
           className="flex-1 flex flex-col justify-start items-center"
@@ -90,7 +90,7 @@ export default function Hash({ params }: { params: { hash: string } }) {
               alt="Nota fiscal"
               width={600}
               height={700}
-              className="w-[400px] h-full"
+              className="w-full md:w-[400px] h-full"
             />
           )}
         </Box>
@@ -99,7 +99,7 @@ export default function Hash({ params }: { params: { hash: string } }) {
           component="section"
           className="flex-1 flex flex-col justify-start gap-8"
         >
-          <div className="flex flex-col justify-start gap-2 w-2/3">
+          <div className="flex flex-col justify-start gap-2 w-full md:w-2/3">
             <Typography variant="subtitle1" color="primary">
               Informações sobre o envio
             </Typography>
@@ -139,7 +139,7 @@ export default function Hash({ params }: { params: { hash: string } }) {
             )}
           </div>
 
-          <div className="flex flex-col justify-start gap-2 w-2/3">
+          <div className="flex flex-col justify-start gap-2 w-full md:w-2/3">
             <Typography variant="subtitle1" color="primary">
               Resultado da solicitação
             </Typography>
@@ -192,7 +192,7 @@ export default function Hash({ params }: { params: { hash: string } }) {
             />
           </div>
 
-          <div className="flex flex-col justify-start gap-2 w-2/3">
+          <div className="flex flex-col justify-start gap-2 w-full md:w-2/3">
             <Typography variant="subtitle1" color="primary">
               Resposta do ChatGPT Vision
             </Typography>
