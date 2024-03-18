@@ -31,15 +31,23 @@ export const MainSection = ({ receiptsData }: MainSectionProps) => {
     fetchData();
   }, []);
 
+  React.useEffect(() => {
+    setFilteredReceiptsData(receiptsData);
+  }, [receiptsData]);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     const searchValue = event.target.value;
-    setFilteredReceiptsData(
-      receiptsData?.filter((receiptData) =>
-        receiptData.internalReceipt.uniqueHash
-          .toLowerCase()
-          .includes(searchValue.toLowerCase()),
-      ),
-    );
+    if (searchValue !== "") {
+      setFilteredReceiptsData(
+        receiptsData?.filter((receiptData) =>
+          receiptData.internalReceipt.uniqueHash
+            .toLowerCase()
+            .includes(searchValue.toLowerCase()),
+        ),
+      );
+    } else {
+      setFilteredReceiptsData(receiptsData);
+    }
   };
 
   return (
