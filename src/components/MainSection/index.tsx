@@ -14,6 +14,9 @@ export const MainSection = ({ receiptsData }: MainSectionProps) => {
   const [openModal, setOpenModal] = React.useState(false);
   const [showClearIcon, setShowClearIcon] = React.useState("none");
   const [userType, setUserType] = React.useState<string | undefined>();
+  const [filteredReceiptsData, setFilteredReceiptsData] = React.useState<
+    AllReceiptDataType | undefined
+  >(receiptsData);
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +32,14 @@ export const MainSection = ({ receiptsData }: MainSectionProps) => {
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    setShowClearIcon(event.target.value === "" ? "none" : "flex");
+    const searchValue = event.target.value;
+    setFilteredReceiptsData(
+      receiptsData?.filter((receiptData) =>
+        receiptData.internalReceipt.uniqueHash
+          .toLowerCase()
+          .includes(searchValue.toLowerCase()),
+      ),
+    );
   };
 
   return (
@@ -65,7 +75,7 @@ export const MainSection = ({ receiptsData }: MainSectionProps) => {
           )}
         </div>
         <div className="flex flex-wrap justify-center gap-4">
-          {receiptsData?.map((receiptData, index) => (
+          {filteredReceiptsData?.map((receiptData, index) => (
             <RefundCard key={index} cardInfo={receiptData} />
           ))}
         </div>
