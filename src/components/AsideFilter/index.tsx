@@ -49,7 +49,7 @@ export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
 
   return (
     <aside
-      className="h-full flex items-center justify-center pb-12 px-8 fixed"
+      className="h-full flex items-center justify-center py-20 px-8 fixed overflow-y-auto"
       style={{ gridArea: "aside" }}
     >
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">

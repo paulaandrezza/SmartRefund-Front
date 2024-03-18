@@ -1,6 +1,6 @@
 import { AllReceiptDataType } from "@/types/refund/EventSourceType";
 import { getCookie } from "@/utils/helpers/manageCookies";
-import { Add, Search } from "@mui/icons-material";
+import { Add, RefreshRounded, Search } from "@mui/icons-material";
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import React from "react";
 import { AddReciptModal } from "../Modals/AddReciptModal";
@@ -61,7 +61,13 @@ export const MainSection = ({
         bgcolor="primary"
         style={{ gridArea: "mainSection" }}
       >
-        <div className="flex justify-end flex-1 gap-4 sticky pb-4">
+        <div className="flex justify-end items-center flex-1 gap-4 sticky pb-4">
+          <div
+            className="flex items-center justify-center cursor-pointer"
+            onClick={() => fetchReceiptsData()}
+          >
+            <RefreshRounded color="primary" fontSize="large" />
+          </div>
           <TextField
             size="small"
             className="w-80"
