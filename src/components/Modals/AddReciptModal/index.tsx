@@ -114,7 +114,7 @@ export const AddReciptModal = ({ open, setIsOpen }: AddReciptModalProps) => {
                 alt="Preview"
                 width={600}
                 height={700}
-                className="w-full md:w-96 h-full rounded-md"
+                className="w-full h-[200px] rounded-md object-cover object-top"
               />
             </div>
           )}
