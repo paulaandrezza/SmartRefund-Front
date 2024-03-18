@@ -38,7 +38,6 @@ export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
   // TODO: descobrir pq a solicitação nao funciona de primeira
 
   const onSubmit: SubmitHandler<FetchReceiptsDataOptions> = async (data) => {
-    console.log("submit");
     await fetchReceiptsData(data);
   };
 
