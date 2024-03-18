@@ -1,4 +1,4 @@
-export const filters = {
+export const filters: Record<FilterOptionKey, FilterOption> = {
   optionsStatusGPT: {
     label: "Status de Envio para o GPT",
     key: "optionsStatusGPT",
@@ -59,4 +59,20 @@ export const filters = {
       },
     ],
   },
+};
+
+type FilterOptionKey =
+  | "optionsStatusGPT"
+  | "optionsStatusTranslate"
+  | "optionsStatusRefund";
+
+export type optionsType = {
+  label: string;
+  value: string;
+};
+
+export type FilterOption = {
+  label: string;
+  key: FilterOptionKey;
+  options: optionsType[];
 };

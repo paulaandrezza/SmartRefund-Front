@@ -1,5 +1,5 @@
 import { ReciptValidationType } from "@/types/refund/ReciptValidationType";
-import { filters } from "@/utils/constants/filters";
+import { FilterOption, filters, optionsType } from "@/utils/constants/filters";
 import { yupResolver } from "@hookform/resolvers/yup";
 import {
   Button,
@@ -9,6 +9,7 @@ import {
   FormControlLabel,
   FormLabel,
 } from "@mui/material";
+import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import * as yup from "yup";
 
@@ -19,6 +20,7 @@ const asideFilterSchema = yup.object().shape({
 });
 
 export const AsideFilter = () => {
+  const [resetFilter, setResetFilters] = React.useState(false);
   const {
     register,
     handleSubmit,
@@ -37,13 +39,19 @@ export const AsideFilter = () => {
     }
   };
 
+  const handleReset = () => {
+    reset();
+    setResetFilters(true);
+    console.log("reset");
+  };
+
   return (
     <aside
       className="h-full flex items-center justify-center pb-12 px-8 fixed"
       style={{ gridArea: "aside" }}
     >
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        {Object.values(filters).map((filter: any) => {
+        {Object.values(filters).map((filter: FilterOption) => {
           return (
             <>
               <FormControl
@@ -55,7 +63,7 @@ export const AsideFilter = () => {
                   <b>{filter.label}</b>
                 </FormLabel>
                 <div className="flex flex-col">
-                  {filter.options.map((option: any) => {
+                  {filter.options.map((option: optionsType) => {
                     return (
                       <FormControlLabel
                         key={option.value}
@@ -81,7 +89,7 @@ export const AsideFilter = () => {
           <Button type="submit" variant="contained">
             Aplicar filtros
           </Button>
-          <Button type="button" variant="outlined" onClick={() => reset()}>
+          <Button type="button" variant="outlined" onClick={handleReset}>
             Limpar filtros
           </Button>
         </div>
