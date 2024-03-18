@@ -35,13 +35,8 @@ export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
   });
 
   const onSubmit: SubmitHandler<FetchReceiptsDataOptions> = async (data) => {
-    console.log(data);
+    console.log("submit");
     fetchReceiptsData(data);
-    try {
-      console.log(`Form submission: ${JSON.stringify(data)}`);
-    } catch (error) {
-      console.error("error:", error);
-    }
   };
 
   const handleReset = () => {

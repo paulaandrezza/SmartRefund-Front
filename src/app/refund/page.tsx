@@ -11,6 +11,7 @@ export default function Refund() {
   const [receiptsData, setReceiptsData] = React.useState<AllReceiptDataType>();
 
   const fetchReceiptsData = async (options?: FetchReceiptsDataOptions) => {
+    console.log("fetchReceipt");
     try {
       const data = await EventSourceServices.getAllReceipts(options);
       setReceiptsData(data.data);
