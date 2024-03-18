@@ -83,12 +83,11 @@ export default function Hash({ params }: { params: { hash: string } }) {
         >
           {receiptData?.internalReceipt.image && (
             <Image
-              src="/Nfe.png"
-              // src={receiptData.internalReceipt.image || "/logo.png"}
+              src={`data:image/jpeg;base64,${receiptData.internalReceipt.image}`}
               alt="Nota fiscal"
               width={600}
               height={700}
-              className="w-full md:w-[400px] h-full"
+              className="w-full md:w-[400px] h-full object-contain"
             />
           )}
         </Box>
@@ -97,7 +96,7 @@ export default function Hash({ params }: { params: { hash: string } }) {
           component="section"
           className="flex-1 flex flex-col justify-start gap-8"
         >
-          <div className="flex flex-col justify-start gap-2 w-full md:w-2/3">
+          <div className="flex flex-col justify-start gap-2 w-full md:w-2/3 md:min-w-[400px]">
             <Typography variant="subtitle1" color="primary">
               Informações sobre o envio
             </Typography>
@@ -137,7 +136,7 @@ export default function Hash({ params }: { params: { hash: string } }) {
             )}
           </div>
 
-          <div className="flex flex-col justify-start gap-2 w-full md:w-2/3">
+          <div className="flex flex-col justify-start gap-2 w-full md:w-2/3 md:min-w-[400px]">
             <Typography variant="subtitle1" color="primary">
               Resultado da solicitação
             </Typography>
@@ -190,7 +189,7 @@ export default function Hash({ params }: { params: { hash: string } }) {
             />
           </div>
 
-          <div className="flex flex-col justify-start gap-2 w-full md:w-2/3">
+          <div className="flex flex-col justify-start gap-2 w-full md:w-2/3 md:min-w-[400px]">
             <Typography variant="subtitle1" color="primary">
               Resposta do ChatGPT Vision
             </Typography>

@@ -28,7 +28,7 @@ export const RefundCard = ({ cardInfo }: RefundCardProps) => {
         component="img"
         height="194"
         // image={cardInfo.internalReceipt.image}
-        image={"/Nfe.png"}
+        image={`data:image/jpeg;base64,${cardInfo.internalReceipt.image}`}
         alt="Nota fiscal"
       />
       <CardContent>

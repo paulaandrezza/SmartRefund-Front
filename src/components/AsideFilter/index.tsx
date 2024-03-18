@@ -34,6 +34,8 @@ export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
     resolver: yupResolver(asideFilterSchema),
   });
 
+  // TODO: descobrir pq a solicitação nao funciona de primeira
+
   const onSubmit: SubmitHandler<FetchReceiptsDataOptions> = async (data) => {
     console.log("submit");
     fetchReceiptsData(data);
