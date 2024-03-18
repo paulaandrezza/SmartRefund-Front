@@ -20,7 +20,7 @@ const asideFilterSchema = yup.object().shape({
 });
 
 interface AsideFilterProps {
-  fetchReceiptsData: (options?: FetchReceiptsDataOptions) => void;
+  fetchReceiptsData: (options?: FetchReceiptsDataOptions) => Promise<void>;
 }
 
 export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {

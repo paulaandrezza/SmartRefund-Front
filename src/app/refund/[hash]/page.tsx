@@ -35,26 +35,26 @@ export default function Hash({ params }: { params: { hash: string } }) {
   const [userType, setUserType] = React.useState<string | undefined>();
   const [receiptData, setReceiptData] = React.useState<ReceiptDataType>();
 
+  const fetchUserTypeData = async () => {
+    try {
+      const user_type = await getCookie();
+      setUserType(user_type.userType?.value);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const fetchReceiptData = async () => {
+    try {
+      const data = await EventSourceServices.getReceiptByHash(params.hash);
+      setReceiptData(data.data);
+    } catch (error) {
+      console.error("Erro ao buscar notas fiscais:", error);
+    }
+  };
+
   React.useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const user_type = await getCookie();
-        setUserType(user_type.userType?.value);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    const fetchReceiptData = async () => {
-      try {
-        const data = await EventSourceServices.getReceiptByHash(params.hash);
-        setReceiptData(data.data);
-      } catch (error) {
-        console.error("Erro ao buscar notas fiscais:", error);
-      }
-    };
-
-    fetchData();
+    fetchUserTypeData();
     fetchReceiptData();
   }, []);
 
@@ -225,6 +225,7 @@ export default function Hash({ params }: { params: { hash: string } }) {
         open={statusModalOpen}
         setIsOpen={setStatusModalOpen}
         uniqueHash={params.hash}
+        fetchReceiptData={fetchReceiptData}
       />
     </main>
   );

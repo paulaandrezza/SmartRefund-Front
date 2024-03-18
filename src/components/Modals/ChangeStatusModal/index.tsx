@@ -34,6 +34,7 @@ type changeStatusModalProps = {
   open: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   uniqueHash: string;
+  fetchReceiptData: () => Promise<void>;
 };
 
 const changeStatusModalSchema = yup.object().shape({
@@ -49,6 +50,7 @@ export const ChangeStatusModal = ({
   open,
   setIsOpen,
   uniqueHash,
+  fetchReceiptData,
 }: changeStatusModalProps) => {
   const {
     register,
@@ -63,8 +65,15 @@ export const ChangeStatusModal = ({
   const onSubmit: SubmitHandler<ChangeStatusType> = async (data) => {
     try {
       const changeStatusResponse = await StatusServices.changeStatus(data);
+      fetchReceiptData();
       toast.success(
-        `Status da nota fiscal ${changeStatusResponse.data.uniqueHash} atualizado com sucesso!`,
+        `Status da nota fiscal ${changeStatusResponse.data.uniqueHash} atualizado com sucesso para 
+        ${
+          filters.optionsStatusRefund.options.find(
+            (option) =>
+              option.value === changeStatusResponse.data.status.toString(),
+          )?.label
+        }!`,
       );
       setIsOpen(false);
     } catch (error) {
