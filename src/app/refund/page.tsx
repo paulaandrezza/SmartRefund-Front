@@ -6,15 +6,6 @@ import { EventSourceServices } from "@/services/recipt/eventSource_services";
 import { AllReceiptDataType } from "@/types/refund/EventSourceType";
 import React from "react";
 
-const gridStyles = {
-  gridArea: "main",
-  display: "grid",
-  width: "100%",
-  gridTemplateColumns: "280px 1fr",
-  gridTemplateAreas: `"aside mainSection"`,
-  gap: "32px",
-};
-
 export default function Refund() {
   const [receiptsData, setReceiptsData] = React.useState<AllReceiptDataType>();
 
@@ -33,7 +24,7 @@ export default function Refund() {
   }, []);
 
   return (
-    <main className="bg-slate-50" style={gridStyles}>
+    <main className=".refund-grid-container bg-slate-50">
       <AsideFilter />
       <MainSection receiptsData={receiptsData} />
     </main>

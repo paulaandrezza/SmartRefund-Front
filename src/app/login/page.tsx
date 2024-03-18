@@ -18,15 +18,6 @@ const loginSchema = yup.object().shape({
   password: yup.string().required("Senha obrigatória"),
 });
 
-const gridStyles = {
-  display: "grid",
-  width: "100%",
-  height: "100vh",
-  gridTemplateColumns: "1fr 1fr",
-  gap: "32px",
-  placeItems: "center",
-};
-
 export default function Login() {
   const router = useRouter();
   const { handleLogin } = useAuth();
@@ -56,8 +47,8 @@ export default function Login() {
   };
 
   return (
-    <main style={gridStyles}>
-      <div className="bg-green-50 w-full h-full flex flex-col items-center justify-center gap-4">
+    <main className="login-grid-container">
+      <div className="hidden bg-green-50 w-full h-full md:flex flex-col items-center justify-center gap-4">
         <Image src="/banner.svg" alt="logo" width={300} height={300} />
         <span className="w-24 h-4 bg-[#bfe5cf] rounded-full" />
         <div className="flex flex-col items-center justify-center gap-1 mt-4">
