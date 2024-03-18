@@ -33,6 +33,7 @@ export const MainSection = ({ receiptsData }: MainSectionProps) => {
 
   React.useEffect(() => {
     setFilteredReceiptsData(receiptsData);
+    console.log(receiptsData);
   }, [receiptsData]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -83,7 +84,7 @@ export const MainSection = ({ receiptsData }: MainSectionProps) => {
           )}
         </div>
         <div className="flex flex-wrap justify-center gap-4">
-          {filteredReceiptsData?.map((receiptData, index) => (
+          {receiptsData?.map((receiptData, index) => (
             <RefundCard key={index} cardInfo={receiptData} />
           ))}
         </div>

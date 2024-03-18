@@ -15,6 +15,8 @@ interface RefundCardProps {
 export const RefundCard = ({ cardInfo }: RefundCardProps) => {
   const { push } = useRouter();
 
+  console.log(`cardInfo: ${cardInfo.internalReceipt.uniqueHash}`);
+
   return (
     <Card
       sx={{ maxWidth: 300 }}
@@ -28,7 +30,8 @@ export const RefundCard = ({ cardInfo }: RefundCardProps) => {
       <CardMedia
         component="img"
         height="194"
-        image={cardInfo.internalReceipt.image}
+        // image={cardInfo.internalReceipt.image}
+        image={"/Nfe.png"}
         alt="Nota fiscal"
       />
       <CardContent>

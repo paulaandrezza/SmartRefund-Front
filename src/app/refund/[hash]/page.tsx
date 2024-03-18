@@ -78,14 +78,14 @@ export default function Hash({ params }: { params: { hash: string } }) {
         )}
       </div>
 
-      <div className="w-full flex flex-col md:p-8 md:flex-row">
+      <div className="w-full flex flex-col gap-4 md:p-8 md:flex-row">
         <Box
           component="section"
           className="flex-1 flex flex-col justify-start items-center"
         >
           {receiptData?.internalReceipt.image && (
             <Image
-              src="/logo.png"
+              src="/Nfe.png"
               // src={receiptData.internalReceipt.image || "/logo.png"}
               alt="Nota fiscal"
               width={600}

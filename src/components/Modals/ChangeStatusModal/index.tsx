@@ -84,7 +84,7 @@ export const ChangeStatusModal = ({
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={{ ...style, width: 600 }}>
+      <Box sx={{ ...style }} className="w-full md:w-[600px]">
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Alterar status da solicitação

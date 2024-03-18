@@ -14,7 +14,6 @@ export default function Refund() {
       try {
         const data = await EventSourceServices.getAllReceipts();
         setReceiptsData(data.data);
-        console.log(data);
       } catch (error) {
         console.error("Erro ao buscar notas fiscais:", error);
       }
@@ -24,7 +23,7 @@ export default function Refund() {
   }, []);
 
   return (
-    <main className=".refund-grid-container bg-slate-50">
+    <main className="refund-grid-container bg-slate-50">
       <AsideFilter />
       <MainSection receiptsData={receiptsData} />
     </main>

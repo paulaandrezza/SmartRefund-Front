@@ -78,7 +78,7 @@ export const AddReciptModal = ({ open, setIsOpen }: AddReciptModalProps) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={{ ...style, width: 600 }}>
+      <Box sx={{ ...style }} className="w-full md:w-[600px]">
         <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Adicionar nota fiscal
@@ -114,7 +114,7 @@ export const AddReciptModal = ({ open, setIsOpen }: AddReciptModalProps) => {
                 alt="Preview"
                 width={600}
                 height={700}
-                className="w-96 h-full rounded-md"
+                className="w-full md:w-96 h-full rounded-md"
               />
             </div>
           )}
