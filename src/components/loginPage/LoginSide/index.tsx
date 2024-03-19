@@ -49,21 +49,21 @@ export const LoginSide = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-96 flex-col justify-between items-center gap-10"
+      className="flex max-w-96 flex-col items-center justify-between gap-10 p-4 md:w-96"
     >
-      <div className="flex flex-col justify-center items-center gap-2">
+      <div className="flex flex-col items-center justify-center gap-2">
         <Image
           src="/logo.png"
           alt="logo"
           width={200}
           height={200}
-          className="object-contain w-40 h-40"
+          className="h-40 w-40 object-contain"
         />
       </div>
       <Typography align="center" variant="body1">
         Bem-vindo de volta! Por favor, faça login para continuar de onde parou.
       </Typography>
-      <div className="flex flex-col gap-8 w-full">
+      <div className="flex w-full flex-col gap-8">
         <TextField
           id="input-with-icon-textfield"
           label="Username"

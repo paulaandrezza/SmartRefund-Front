@@ -20,16 +20,20 @@ export const ReceiptHeader = ({
   const { push } = useRouter();
 
   return (
-    <div className="flex justify-between gap-4 w-full">
+    <div className="flex w-full justify-between gap-4">
       <Button variant="text" onClick={() => push(APP_ROUTES.private.refund)}>
         <ArrowBack />
-        Voltar à Página Anterior
+        <span className="hidden md:inline">Voltar à Página Anterior</span>
+        <span className="inline md:hidden">Voltar</span>
       </Button>
       {userType === process.env.NEXT_PUBLIC_API_TOKEN_FINANCE_EMPLOYE &&
         receiptData?.translatedVision.status === 1 && (
           <Button variant="contained" onClick={() => setStatusModalOpen(true)}>
             <Edit />
-            Alterar status da solicitação
+            <span className="hidden md:inline">
+              Alterar status da solicitação
+            </span>
+            <span className="inline md:hidden">Alterar status</span>
           </Button>
         )}
     </div>

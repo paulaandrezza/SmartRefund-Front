@@ -37,7 +37,7 @@ export default function Hash({ params }: { params: { hash: string } }) {
 
   return (
     <main
-      className="bg-slate-50 flex flex-col items-start p-4 md:p-8"
+      className="flex flex-col items-start gap-4 bg-slate-50 p-4 md:p-8"
       style={{ gridArea: "main" }}
     >
       <ReceiptHeader
