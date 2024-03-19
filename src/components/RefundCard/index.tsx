@@ -16,7 +16,7 @@ export const RefundCard = ({ cardInfo }: RefundCardProps) => {
   const { push } = useRouter();
   return (
     <Card
-      sx={{ maxWidth: 300 }}
+      sx={{ maxWidth: 300, width: "100%" }}
       className="cursor-pointer"
       onClick={() =>
         push(
