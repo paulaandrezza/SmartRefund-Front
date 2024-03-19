@@ -1,17 +1,11 @@
 # Projeto SmartRefund 🤖💰
 
-<div style="display: flex; gap: 16px; align-items: center; justify-content: center; width: 100%;">
-
+<div width="100%" align="center" style="display: flex; gap: 16px;">
 <a href='https://nextjs.org/' target="_blank"><img alt='next.js' src='https://img.shields.io/badge/next.js-100000?style=for-the-badge&logo=next.js&logoColor=white&labelColor=000000&color=000000'/></a>
-
 <a href='https://mui.com/' target="_blank"><img alt='MUI' src='https://img.shields.io/badge/MUI-100000?style=for-the-badge&logo=MUI&logoColor=white&labelColor=007FFF&color=007FFF'/></a>
-
 <a href='https://axios-http.com/' target="_blank"><img alt='Axios' src='https://img.shields.io/badge/Axios-100000?style=for-the-badge&logo=Axios&logoColor=white&labelColor=5A29E4&color=5A29E4'/></a>
-
 <a href='https://react.dev/' target="_blank"><img alt='React' src='https://img.shields.io/badge/React-100000?style=for-the-badge&logo=React&logoColor=white&labelColor=149ECA&color=149ECA'/></a>
-
 <a href='https://tailwindcss.com/' target="_blank"><img alt='Tailwind CSS' src='https://img.shields.io/badge/tailwind_css-100000?style=for-the-badge&logo=Tailwind CSS&logoColor=white&labelColor=38BDF8&color=38BDF8'/></a>
-
 </div>
 
 SmartRefund é um sistema de reembolsos para empresas que permite o envio e análise de notas fiscais utilizando a tecnologia ChatGPT 4 Vision. Este repositório contém o código-fonte do frontend do projeto.
