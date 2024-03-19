@@ -61,11 +61,11 @@ export const MainSection = ({
     <>
       <Box
         component="section"
-        className="h-full overflow-x-hidden bg-slate-50 p-4 md:p-6"
+        className="flex h-full flex-col gap-4 overflow-x-hidden bg-slate-50 p-4 md:p-6"
         bgcolor="primary"
         style={{ gridArea: "mainSection" }}
       >
-        <div className="sticky flex flex-1 items-center justify-end gap-4 pb-4">
+        <div className="sticky flex flex-1 items-center justify-end gap-4">
           <div
             className="flex cursor-pointer items-center justify-center"
             onClick={() => window.location.reload()}
@@ -89,17 +89,29 @@ export const MainSection = ({
           />
 
           {userType === process.env.NEXT_PUBLIC_API_TOKEN_EMPLOYEE && (
-            <Button variant="contained" onClick={() => setOpenModal(true)}>
-              <Add />
-              Adicionar nota fiscal
-            </Button>
+            <div className="hidden md:flex">
+              <Button variant="contained" onClick={() => setOpenModal(true)}>
+                <Add />
+                <span className="hidden md:inline">Adicionar nota fiscal</span>
+              </Button>
+            </div>
           )}
         </div>
-        <div className="text-right md:hidden">
+        <div className="flex items-center justify-end gap-4 md:hidden">
           <Button onClick={() => setOpenFilterMenu(!openFilterMenu)}>
             <Tune />
             Filtrar
           </Button>
+          {userType === process.env.NEXT_PUBLIC_API_TOKEN_EMPLOYEE && (
+            <Button
+              variant="contained"
+              onClick={() => setOpenModal(true)}
+              className="md:hidden"
+            >
+              <Add />
+              <span className="inline md:hidden">Nota fiscal</span>
+            </Button>
+          )}
         </div>
         <div className="flex flex-wrap justify-center gap-4">
           {filteredReceiptsData?.map((receiptData, index) => (
