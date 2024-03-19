@@ -1,4 +1,18 @@
-# SmartRefund
+# Projeto SmartRefund 🤖💰
+
+<div style="display: flex; gap: 16px; align-items: center; justify-content: center; width: 100%;">
+
+<a href='https://nextjs.org/' target="_blank"><img alt='next.js' src='https://img.shields.io/badge/next.js-100000?style=for-the-badge&logo=next.js&logoColor=white&labelColor=000000&color=000000'/></a>
+
+<a href='https://mui.com/' target="_blank"><img alt='MUI' src='https://img.shields.io/badge/MUI-100000?style=for-the-badge&logo=MUI&logoColor=white&labelColor=007FFF&color=007FFF'/></a>
+
+<a href='https://axios-http.com/' target="_blank"><img alt='Axios' src='https://img.shields.io/badge/Axios-100000?style=for-the-badge&logo=Axios&logoColor=white&labelColor=5A29E4&color=5A29E4'/></a>
+
+<a href='https://react.dev/' target="_blank"><img alt='React' src='https://img.shields.io/badge/React-100000?style=for-the-badge&logo=React&logoColor=white&labelColor=149ECA&color=149ECA'/></a>
+
+<a href='https://tailwindcss.com/' target="_blank"><img alt='Tailwind CSS' src='https://img.shields.io/badge/tailwind_css-100000?style=for-the-badge&logo=Tailwind CSS&logoColor=white&labelColor=38BDF8&color=38BDF8'/></a>
+
+</div>
 
 SmartRefund é um sistema de reembolsos para empresas que permite o envio e análise de notas fiscais utilizando a tecnologia ChatGPT 4 Vision. Este repositório contém o código-fonte do frontend do projeto.
 
@@ -11,6 +25,12 @@ O frontend foi desenvolvido utilizando Next.js e está hospedado na plataforma V
 - **Adicionar novas notas fiscais:** Apresenta um modal com a opção de enviar notas fiscais
 - **Detalhes da Nota Fiscal:** Permite que os funcionários visualizem os detalhes das notas submetidas.
 - **Modificar status das solicitações de reembolso**: Apresenta um modal com as opções `Submetido`, `Pago` e `Recusado`. Somente pessoas com acesso do financeiro conseguem realizar essas alterações.
+
+<p align="center">
+    <img alt="Página de login" src="./public/loginPage.jpeg" width="100%">
+    <img alt="Listagem de notas fiscais" src="./public/receiptsPage.jpeg" width="100%">
+    <img alt="Detalhes de nota fiscal" src="./public/receiptsPageDetails.jpeg" width="100%">
+</p>
 
 ## Tecnologias Utilizadas
 
@@ -28,11 +48,20 @@ O frontend foi desenvolvido utilizando Next.js e está hospedado na plataforma V
 git clone https://github.com/armentanoc/SmartRefund.git
 ```
 
-2. Execute o projeto
+2. Configure o projeto `SmartRefund.Infra` como o projeto de inicialização no `Package Manager Console`.
 
-3. Acesse o link do front: [Smart Refund](https://smart-refund-front.vercel.app/)
+3. Certifique-se de que as migrações do banco de dados foram realizadas pelo Entity Framework. Se não, execute os seguintes comandos:
 
-4. Na tela de login utilize um dos seguintes acessos:
+```bash
+Add-Migration CreateDatabaseInitial
+Update-Database
+```
+
+4. Execute o projeto
+
+5. Acesse o link do front: [Smart Refund](https://smart-refund-front.vercel.app/)
+
+6. Na tela de login utilize um dos seguintes acessos:
 
 ```bash
 Employee - Permite que submeta notas ficais para reembolso e verifique os status das notas enviadas.
