@@ -63,7 +63,7 @@ export const AsideFilter = ({
 
   return (
     <aside
-      className={`fixed ${openFilterMenu ? "flex" : "hidden"} top-14 z-10 h-full w-full flex-col items-center justify-center overflow-y-auto bg-[#e5f4eb] px-8 py-20 md:flex md:w-auto`}
+      className={`fixed ${openFilterMenu ? "flex" : "hidden"} top-14 z-10 h-full w-full flex-col items-center justify-start overflow-y-auto bg-[#e5f4eb] px-8 pb-20 pt-4 md:flex md:w-auto md:justify-center md:py-20`}
       style={{ gridArea: "aside" }}
     >
       <span
