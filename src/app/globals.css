@@ -23,13 +23,18 @@
   grid-area: main;
   display: grid;
   width: 100%;
-  grid-template-columns: 280px 1fr;
-  grid-template-areas: "aside mainSection";
+  grid-template-columns: 1fr;
+  grid-template-areas: "mainSection";
   gap: 32px;
 }
 
 @media (min-width: 768px) {
   .login-grid-container {
     grid-template-columns: 1fr 1fr;
+  }
+
+  .refund-grid-container {
+    grid-template-columns: 280px 1fr;
+    grid-template-areas: "aside mainSection";
   }
 }

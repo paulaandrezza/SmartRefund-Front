@@ -9,6 +9,7 @@ import React from "react";
 
 export default function Refund() {
   const [receiptsData, setReceiptsData] = React.useState<AllReceiptDataType>();
+  const [openFilterMenu, setOpenFilterMenu] = React.useState<boolean>(false);
 
   const fetchReceiptsData = async (options?: FetchReceiptsDataOptions) => {
     try {
@@ -25,10 +26,16 @@ export default function Refund() {
 
   return (
     <main className="refund-grid-container bg-slate-50">
-      <AsideFilter fetchReceiptsData={fetchReceiptsData} />
+      <AsideFilter
+        fetchReceiptsData={fetchReceiptsData}
+        openFilterMenu={openFilterMenu}
+        setOpenFilterMenu={setOpenFilterMenu}
+      />
       <MainSection
         receiptsData={receiptsData}
         fetchReceiptsData={fetchReceiptsData}
+        openFilterMenu={openFilterMenu}
+        setOpenFilterMenu={setOpenFilterMenu}
       />
     </main>
   );

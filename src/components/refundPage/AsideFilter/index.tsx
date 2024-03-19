@@ -1,6 +1,7 @@
 import { FetchReceiptsDataOptions } from "@/types/refund/ReciptValidationType";
 import { FilterOption, filters, optionsType } from "@/utils/constants/filters";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { ClearRounded } from "@mui/icons-material";
 import {
   Button,
   Checkbox,
@@ -21,9 +22,15 @@ const asideFilterSchema = yup.object().shape({
 
 interface AsideFilterProps {
   fetchReceiptsData: (options?: FetchReceiptsDataOptions) => Promise<void>;
+  openFilterMenu: boolean;
+  setOpenFilterMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
+export const AsideFilter = ({
+  fetchReceiptsData,
+  openFilterMenu,
+  setOpenFilterMenu,
+}: AsideFilterProps) => {
   // const [resetFilter, setResetFilters] = React.useState(false);
   const {
     register,
@@ -39,6 +46,7 @@ export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
 
   const onSubmit: SubmitHandler<FetchReceiptsDataOptions> = async (data) => {
     await fetchReceiptsData(data);
+    setOpenFilterMenu(false);
   };
 
   // const handleReset = () => {
@@ -55,10 +63,19 @@ export const AsideFilter = ({ fetchReceiptsData }: AsideFilterProps) => {
 
   return (
     <aside
-      className="h-full flex items-center justify-center py-20 px-8 fixed overflow-y-auto bg-[#e5f4eb]"
+      className={`fixed ${openFilterMenu ? "flex" : "hidden"} top-14 z-10 h-full w-full flex-col items-center justify-center overflow-y-auto bg-[#e5f4eb] px-8 py-20 md:flex md:w-auto`}
       style={{ gridArea: "aside" }}
     >
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+      <span
+        className="w-full text-right md:hidden"
+        onClick={() => setOpenFilterMenu(false)}
+      >
+        <ClearRounded />
+      </span>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex w-full flex-col gap-4"
+      >
         {Object.values(filters).map((filter: FilterOption) => {
           return (
             <React.Fragment key={filter.key}>

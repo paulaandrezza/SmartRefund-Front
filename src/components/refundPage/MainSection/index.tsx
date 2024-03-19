@@ -1,6 +1,6 @@
 import { AllReceiptDataType } from "@/types/refund/EventSourceType";
 import { getCookie } from "@/utils/helpers/manageCookies";
-import { Add, RefreshRounded, Search } from "@mui/icons-material";
+import { Add, RefreshRounded, Search, Tune } from "@mui/icons-material";
 import { Box, Button, InputAdornment, TextField } from "@mui/material";
 import React from "react";
 import { AddReciptModal } from "../../Modals/AddReciptModal";
@@ -9,11 +9,15 @@ import { RefundCard } from "../../RefundCard";
 interface MainSectionProps {
   receiptsData: AllReceiptDataType | undefined;
   fetchReceiptsData: () => void;
+  openFilterMenu: boolean;
+  setOpenFilterMenu: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const MainSection = ({
   receiptsData,
   fetchReceiptsData,
+  openFilterMenu,
+  setOpenFilterMenu,
 }: MainSectionProps) => {
   const [openModal, setOpenModal] = React.useState(false);
   const [userType, setUserType] = React.useState<string | undefined>();
@@ -57,13 +61,13 @@ export const MainSection = ({
     <>
       <Box
         component="section"
-        className="h-full p-6 bg-slate-50 overflow-x-hidden"
+        className="h-full overflow-x-hidden bg-slate-50 p-4 md:p-6"
         bgcolor="primary"
         style={{ gridArea: "mainSection" }}
       >
-        <div className="flex justify-end items-center flex-1 gap-4 sticky pb-4">
+        <div className="sticky flex flex-1 items-center justify-end gap-4 pb-4">
           <div
-            className="flex items-center justify-center cursor-pointer"
+            className="flex cursor-pointer items-center justify-center"
             onClick={() => window.location.reload()}
           >
             <RefreshRounded color="primary" fontSize="large" />
@@ -90,6 +94,12 @@ export const MainSection = ({
               Adicionar nota fiscal
             </Button>
           )}
+        </div>
+        <div className="text-right md:hidden">
+          <Button onClick={() => setOpenFilterMenu(!openFilterMenu)}>
+            <Tune />
+            Filtrar
+          </Button>
         </div>
         <div className="flex flex-wrap justify-center gap-4">
           {filteredReceiptsData?.map((receiptData, index) => (
