@@ -9,6 +9,6 @@ export const StatusServices = {
   changeStatus(
     changeStatusForm: ChangeStatusType,
   ): AxiosPromise<ChangeStatusResponseType> {
-    return api.patch(`/receipt/status`, changeStatusForm);
+    return api.patch(`/management/status`, changeStatusForm);
   },
 };
